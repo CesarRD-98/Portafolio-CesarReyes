@@ -5,15 +5,20 @@ import React, {useEffect, useState} from 'react'
 import {FaBars} from 'react-icons/fa'
 import './navbar.scss'
 import {usePathname} from 'next/navigation'
+import {useThemeContext} from "@/app/context/changeTheme/theme.provider";
+import {FiSun, FiMoon} from 'react-icons/fi';
 
 export default function Navbar() {
     const pathname = usePathname()
+    const {theme, toggleTheme} = useThemeContext()
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
     const toggleMenu = () => {
         setIsOpenMenu(!isOpenMenu)
     }
+
+    const currentTheme: boolean = theme === 'light'
 
     useEffect(() => {
         setWindowWidth(window.innerWidth)
@@ -31,16 +36,16 @@ export default function Navbar() {
     }, [pathname])
 
     return (
-        <nav>
+        <nav className='nav'>
             <div
                 onClick={toggleMenu}
-                className='menu-toggle'>
+                className='nav__toggle'>
                 <FaBars size={24}/>
             </div>
-            <div className="logo">
+            <div className="nav__logo">
                 <Link href={'/'}>
                     <Image
-                        className='logo-image'
+                        className='nav__logo-image'
                         src="/dev-icon.png"
                         alt="logo"
                         height={512}
@@ -48,37 +53,44 @@ export default function Navbar() {
                 </Link>
             </div>
 
-            <div className="navbar-desktop">
-                <ul className='navbar'>
-                    <li>
-                        <Link href={'/'} className='link'>Inicio</Link>
-                    </li>
-                    <li>
-                        <Link href={'/projects'} className='link'>Mis proyectos</Link>
-                    </li>
-                    <li>
-                        <Link href={'/about-me'} className='link'>Sobre mí</Link>
-                    </li>
-                    <li>
-                        <Link href={'/contact'} className='link'>Contacto</Link>
-                    </li>
-                </ul>
+            <ul className='nav__menu nav__menu--desktop'>
+                <li>
+                    <Link href={'/'} className='nav__menu-item'>Inicio</Link>
+                </li>
+                <li>
+                    <Link href={'/projects'} className='nav__menu-item'>Mis proyectos</Link>
+                </li>
+                <li>
+                    <Link href={'/about-me'} className='nav__menu-item'>Sobre mí</Link>
+                </li>
+                <li>
+                    <Link href={'/contact'} className='nav__menu-item'>Contacto</Link>
+                </li>
+            </ul>
+
+            <div className={`nav__theme ${currentTheme ? 'light' : 'dark'}`}>
+                <button onClick={toggleTheme} className='nav__theme-btn'>
+                    {currentTheme ? <FiSun size={18}/> : <FiMoon size={18}/>}
+                    {windowWidth > 768 && (
+                        currentTheme ? 'claro' : 'oscuro'
+                    )}
+                </button>
             </div>
 
             {/* For mobiles */}
             <div className={`overlay ${isOpenMenu ? 'active' : 'close'}`} onClick={toggleMenu}>
-                <ul className='navbar' onClick={(e) => e.stopPropagation()}>
+                <ul className='nav__menu' onClick={(e) => e.stopPropagation()}>
                     <li>
-                        <Link href={'/'} className='link'>Inicio</Link>
+                        <Link href={'/'} className='nav__menu-item'>Inicio</Link>
                     </li>
                     <li>
-                        <Link href={'/project'} className='link'>Mis projectos</Link>
+                        <Link href={'/projects'} className='nav__menu-item'>Mis proyectos</Link>
                     </li>
                     <li>
-                        <Link href={'/about-me'} className='link'>Sobre mí</Link>
+                        <Link href={'/about-me'} className='nav__menu-item'>Sobre mí</Link>
                     </li>
                     <li>
-                        <Link href={'/contact'} className='link'>Contacto</Link>
+                        <Link href={'/contact'} className='nav__menu-item'>Contacto</Link>
                     </li>
                 </ul>
             </div>
