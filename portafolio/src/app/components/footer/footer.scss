@@ -1,9 +1,17 @@
 footer {
-    width: 100%;
-    padding: 1rem 0;
-    text-align: center;
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
 
   p {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    p {
+      font-size: 13px;
+    }
   }
 }

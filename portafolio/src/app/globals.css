@@ -1,18 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
+    --color-primary: #306dbc;
     --bg-color: #fff;
     --text-color: #1b1b1b;
-    --text-color-hover: #111;
+    --text-color-soft: #707070;
+    --btn-color: #efefef;
+    --btn-color-hover: #d6d6d6;
     --border-color: #dfdfdf;
     --shadow-color: 0 2px 6px rgba(0, 0, 0, 0.2);
     --bg-color-soft: #f9f9f9;
 }
 
 [data-theme="dark"] {
+    --color-primary: #1870e1;
     --bg-color: #1b1b1b;
     --text-color: #eee;
-    --text-color-hover: #eee;
+    --text-color-soft: #9c9c9c;
+    --btn-color: #5a5a5a;
+    --btn-color-hover: #474646;
     --border-color: #5a5a5a;
     --shadow-color: 0 2px 6px rgba(190, 190, 190, 0.2);
     --bg-color-soft: #292929;
@@ -24,7 +30,7 @@ body {
     overflow-x: hidden;
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: 0.3s ease;
 }
 
 body {
@@ -38,4 +44,14 @@ body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
 }

@@ -3,10 +3,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import React, {useEffect, useState} from 'react'
 import {FaBars} from 'react-icons/fa'
-import './navbar.scss'
 import {usePathname} from 'next/navigation'
 import {useThemeContext} from "@/app/context/changeTheme/theme.provider";
 import {FiSun, FiMoon} from 'react-icons/fi';
+import './navbar.scss'
 
 export default function Navbar() {
     const pathname = usePathname()
@@ -43,13 +43,14 @@ export default function Navbar() {
                 <FaBars size={24}/>
             </div>
             <div className="nav__logo">
-                <Link href={'/'}>
+                <Link href={'/'} className='nav__logo-link'>
                     <Image
                         className='nav__logo-image'
                         src="/dev-icon.png"
                         alt="logo"
                         height={512}
-                        width={512}/>
+                        width={770}/>
+                    <h4>Developer</h4>
                 </Link>
             </div>
 
@@ -68,8 +69,8 @@ export default function Navbar() {
                 </li>
             </ul>
 
-            <div className={`nav__theme ${currentTheme ? 'light' : 'dark'}`}>
-                <button onClick={toggleTheme} className='nav__theme-btn'>
+            <div className='nav__theme'>
+                <button onClick={toggleTheme} className='btn nav__theme--btn'>
                     {currentTheme ? <FiSun size={18}/> : <FiMoon size={18}/>}
                     {windowWidth > 768 && (
                         currentTheme ? 'claro' : 'oscuro'
