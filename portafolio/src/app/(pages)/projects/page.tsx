@@ -10,7 +10,7 @@ export default function ProjectsPage() {
     return (
         <section className="section-projects">
             <h4 className='title-section'>Proyectos Destacados</h4>
-            <p className='description-section'>Una selección de proyectos que proyectos que reflejan mi experiencia en el desarollo web y movilF</p>
+            <p className='description-section'>Una selección de proyectos que reflejan mi experiencia en el desarollo web y movil</p>
             <div className="card-container">
                 {user && (
                     <ProjectCardComponent />

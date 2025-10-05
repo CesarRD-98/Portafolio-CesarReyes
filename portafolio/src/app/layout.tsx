@@ -19,12 +19,12 @@ export default function RootLayout({ children }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <ThemeProvider>
-            <html lang="es" className={firaSans.variable}>
-                <body>
+        <html lang="es" className={firaSans.variable} suppressHydrationWarning>
+            <body>
+                <ThemeProvider>
                     {children}
-                </body>
-            </html>
-        </ThemeProvider>
+                </ThemeProvider>
+            </body>
+        </html>
     );
 }

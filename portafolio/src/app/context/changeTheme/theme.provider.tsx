@@ -1,35 +1,27 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChildrenModel } from "@/app/model/children.model";
-import { Theme } from "@/app/model/theme.model";
-import { ThemeContext } from "@/app/context/changeTheme/theme.context";
+import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes';
 
 export default function ThemeProvider({ children }: ChildrenModel) {
-    const [theme, setTheme] = useState<Theme>('light')
+    const [mounted, setMounted] = useState<boolean>(false);
+    useEffect(() => setMounted(true), []);
 
-    useEffect(() => {
-        const storedTheme = localStorage.getItem('theme') as Theme;
-        if (storedTheme) setTheme(storedTheme)
-    }, []);
-
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme)
-        localStorage.setItem('theme', theme)
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light')
+    if (!mounted) {
+        return null
     }
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <NextThemesProvider attribute="data-theme" defaultTheme='system' enableSystem>
             {children}
-        </ThemeContext.Provider>
+        </NextThemesProvider>
     )
 }
 
 export const useThemeContext = () => {
-    const context = useContext(ThemeContext)
-    if (!context) throw new Error('useThemeContext must be used within ThemeProvider')
-    return context
+    const { theme, setTheme } = useTheme()
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light')
+    }
+    return { theme, toggleTheme }
 }
