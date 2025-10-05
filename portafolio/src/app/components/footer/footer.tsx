@@ -1,13 +1,15 @@
+'use client'
 import React from 'react'
 import './footer.scss'
+import { useUser } from '@/app/context/userProfile/user.provider'
 
 export default function Footer() {
-    const author: string = 'César Reyes'
-    const year: string = '2025'
+    const { user } = useUser()
 
     return (
         <footer>
-            <p>&copy; {year} {author}. Todos los derechos resevados.</p>
+            {user === null ? <p>Todos los derechos resevados.</p> :
+                <p>&copy; {user?.year} {user?.author}. Todos los derechos resevados.</p>}
         </footer>
     )
 }

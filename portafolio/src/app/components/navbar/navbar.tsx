@@ -1,16 +1,16 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import React, {useEffect, useState} from 'react'
-import {FaBars} from 'react-icons/fa'
-import {usePathname} from 'next/navigation'
-import {useThemeContext} from "@/app/context/changeTheme/theme.provider";
-import {FiSun, FiMoon} from 'react-icons/fi';
+import React, { useEffect, useState } from 'react'
+import { FaBars } from 'react-icons/fa'
+import { usePathname } from 'next/navigation'
+import { useThemeContext } from "@/app/context/changeTheme/theme.provider";
+import { FiSun, FiMoon } from 'react-icons/fi';
 import './navbar.scss'
 
 export default function Navbar() {
     const pathname = usePathname()
-    const {theme, toggleTheme} = useThemeContext()
+    const { theme, toggleTheme } = useThemeContext()
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
@@ -40,7 +40,7 @@ export default function Navbar() {
             <div
                 onClick={toggleMenu}
                 className='nav__toggle'>
-                <FaBars size={24}/>
+                <FaBars size={24} />
             </div>
             <div className="nav__logo">
                 <Link href={'/'} className='nav__logo-link'>
@@ -49,7 +49,7 @@ export default function Navbar() {
                         src="/dev-icon.png"
                         alt="logo"
                         height={512}
-                        width={770}/>
+                        width={770} />
                     <h4>Developer</h4>
                 </Link>
             </div>
@@ -62,7 +62,7 @@ export default function Navbar() {
                     <Link href={'/projects'} className='nav__menu-item'>Mis proyectos</Link>
                 </li>
                 <li>
-                    <Link href={'/about-me'} className='nav__menu-item'>Sobre mí</Link>
+                    <Link href={'/about_me'} className='nav__menu-item'>Sobre mí</Link>
                 </li>
                 <li>
                     <Link href={'/contact'} className='nav__menu-item'>Contacto</Link>
@@ -70,12 +70,14 @@ export default function Navbar() {
             </ul>
 
             <div className='nav__theme'>
-                <button onClick={toggleTheme} className='btn nav__theme--btn'>
-                    {currentTheme ? <FiSun size={18}/> : <FiMoon size={18}/>}
-                    {windowWidth > 768 && (
-                        currentTheme ? 'claro' : 'oscuro'
-                    )}
-                </button>
+                {windowWidth !== 0 && (
+                    <button onClick={toggleTheme} className='btn nav__theme--btn'>
+                        {currentTheme ? <FiSun size={18} /> : <FiMoon size={18} />}
+                        {windowWidth > 768 && (
+                            currentTheme ? 'claro' : 'oscuro'
+                        )}
+                    </button>
+                )}
             </div>
 
             {/* For mobiles */}
@@ -88,7 +90,7 @@ export default function Navbar() {
                         <Link href={'/projects'} className='nav__menu-item'>Mis proyectos</Link>
                     </li>
                     <li>
-                        <Link href={'/about-me'} className='nav__menu-item'>Sobre mí</Link>
+                        <Link href={'/about_me'} className='nav__menu-item'>Sobre mí</Link>
                     </li>
                     <li>
                         <Link href={'/contact'} className='nav__menu-item'>Contacto</Link>

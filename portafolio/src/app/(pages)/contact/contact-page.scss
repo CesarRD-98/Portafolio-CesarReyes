@@ -1,0 +1,40 @@
+.section-contact {
+  padding: 1rem 2rem;
+
+  .title,
+  .description {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 2rem 0;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-contact {
+    .title {
+      font-size: 22px;
+    }
+
+    .description {
+      font-size: 14px;
+    }
+
+    .card-container {
+      padding: 1rem 0;
+    }
+  }
+}

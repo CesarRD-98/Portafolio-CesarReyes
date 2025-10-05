@@ -1,22 +1,38 @@
-.body {
+.section-projects {
   padding: 1rem 2rem;
 
-  h4 {
-    padding: 1rem 0;
+  .title-section,
+  .description-section {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .title-section {
+    margin-top: 1rem;
+    font-size: 28px;
   }
 
-  .cards-container {
+  .description-section {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+  }
+
+  .card-container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
+    margin-top: 2rem;
   }
+}
 
-  .card {
-    border: 1px solid #ccc;
-    width: 200px;
+@media (max-width: 768px) {
+  .section-projects {
+    .title-section {
+      font-size: 22px;
+    }
 
-    .card-img {
-      width: 100%;
-      height: auto;
+    .description-section {
+      font-size: 14px;
     }
   }
 }
