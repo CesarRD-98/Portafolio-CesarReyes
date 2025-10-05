@@ -1,16 +1,9 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { ChildrenModel } from "@/app/model/children.model";
 import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes';
 
-export default function ThemeProvider({ children }: ChildrenModel) {
-    const [mounted, setMounted] = useState<boolean>(false);
-    useEffect(() => setMounted(true), []);
-
-    if (!mounted) {
-        return null
-    }
-
+export default function ThemeProviderWrapper({ children }: ChildrenModel) {
     return (
         <NextThemesProvider attribute="data-theme" defaultTheme='system' enableSystem>
             {children}

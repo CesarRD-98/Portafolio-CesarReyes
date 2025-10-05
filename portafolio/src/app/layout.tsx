@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import { Fira_Sans } from 'next/font/google'
-import ThemeProvider from "@/app/context/changeTheme/theme.provider";
+import ThemeProviderWrapper from "./context/changeTheme/theme.provider";
 
 export const metadata: Metadata = {
     title: "Portafolio - César Reyes",
@@ -21,9 +21,9 @@ export default function RootLayout({ children }: Readonly<{
     return (
         <html lang="es" className={firaSans.variable} suppressHydrationWarning>
             <body>
-                <ThemeProvider>
+                <ThemeProviderWrapper>
                     {children}
-                </ThemeProvider>
+                </ThemeProviderWrapper>
             </body>
         </html>
     );

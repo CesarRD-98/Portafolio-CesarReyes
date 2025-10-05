@@ -93,7 +93,7 @@
 
     &__toggle {
       display: block;
-      margin-left: 0.5rem;
+      margin-left: 1rem;
       color: var(--text-color);
       transition: 0.1s ease;
       cursor: pointer;
@@ -104,11 +104,11 @@
     }
 
     &__theme {
-      margin-right: 0.5rem;
+      margin-right: 1rem;
 
       &--btn {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
       }
     }
   }
