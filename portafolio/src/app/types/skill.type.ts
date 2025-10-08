@@ -1,0 +1,1 @@
+export type SkillType = 'all' | 'frontend' | 'backend' | 'tools';

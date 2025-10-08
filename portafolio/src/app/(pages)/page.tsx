@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { FaArrowUp, FaRegFilePdf } from 'react-icons/fa6'
 import './home-page.scss';
 import { useRouter } from "next/navigation";
-import { useUser } from '../context/userProfile/user.provider';
+import { useUser } from '../context/user_profile/user.provider';
 
 export default function HomePage() {
     const router = useRouter()
@@ -28,7 +28,7 @@ export default function HomePage() {
                     <div className="section__col-left">
                         <h4>Hola, soy {user?.author}</h4>
                         <h2>Desarrollador Web Fullstack</h2>
-                        <p>{user?.bio}</p>
+                        <p>{user?.shortBio}</p>
                         <div className="section__action">
                             <button
                                 onClick={goToProject}

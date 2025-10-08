@@ -4,28 +4,19 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import { usePathname } from 'next/navigation'
-import { useThemeContext } from "@/app/context/changeTheme/theme.provider";
-import { FiSun, FiMoon } from 'react-icons/fi';
 import './navbar.scss'
+import { useWindowWidthContext } from '@/app/context/window_width/windowWidth.provider'
+import ThemeButton from '../theme_button/themeButton'
 
 export default function Navbar() {
     const pathname = usePathname()
-    const { theme, toggleTheme } = useThemeContext()
+    const { windowWidth } = useWindowWidthContext()
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
-    const [windowWidth, setWindowWidth] = useState<number>(0)
+
 
     const toggleMenu = () => {
         setIsOpenMenu(!isOpenMenu)
     }
-
-    const currentTheme: boolean = theme === 'light'
-
-    useEffect(() => {
-        setWindowWidth(window.innerWidth)
-        const handleResize = () => setWindowWidth(window.innerWidth)
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
 
     useEffect(() => {
         if (windowWidth > 768) setIsOpenMenu(false)
@@ -71,12 +62,7 @@ export default function Navbar() {
 
             <div className='nav__theme'>
                 {windowWidth !== 0 && (
-                    <button onClick={toggleTheme} className='btn nav__theme--btn'>
-                        {currentTheme ? <FiSun size={18} /> : <FiMoon size={18} />}
-                        {windowWidth > 768 && (
-                            currentTheme ? 'claro' : 'oscuro'
-                        )}
-                    </button>
+                    <ThemeButton />
                 )}
             </div>
 

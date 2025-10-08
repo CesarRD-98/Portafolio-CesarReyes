@@ -19,6 +19,7 @@
     p {
       margin-bottom: 2rem;
       color: var(--text-color-soft);
+      line-height: 1.3;
     }
 
     .section__action {
@@ -32,6 +33,7 @@
         background-color: transparent;
         border: 2px solid var(--btn-color-hover);
         color: var(--text-color-soft);
+        font-weight: 600;
         transition: 0.2s ease;
 
         &:hover {
@@ -64,7 +66,7 @@
   }
 }
 
-@media screen and (max-width: 1080px) {
+@media (max-width: 1080px) {
   .section {
     grid-template-columns: 1fr;
 
@@ -81,15 +83,11 @@
 
     .section__col-left {
       h4 {
-        font-size: 18px;
+        font-size: 20px;
       }
 
       h2 {
-        font-size: 36px;
-      }
-
-      p {
-        font-size: 14px;
+        font-size: 38px;
       }
 
       .section__action {

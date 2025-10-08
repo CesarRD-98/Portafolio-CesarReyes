@@ -1,0 +1,21 @@
+.toggle {
+  margin-left: 1rem;
+  gap: 4px;
+  padding: 8px 0;
+  width: 100px;
+  font-size: 14px;
+  background-color: var(--btn-color);
+  color: var(--text-color);
+  transition: 0.1s ease;
+
+  &:hover {
+    background-color: var(--btn-color-hover);
+  }
+}
+
+@media (max-width: 768px) {
+  .toggle {
+    width: 35px;
+    height: 35px;
+  }
+}

@@ -1,4 +1,4 @@
-.section-contact {
+.contact-section {
   padding: 1rem 2rem;
 
   .title,
@@ -7,6 +7,10 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     color: var(--text-color);
+  }
+
+  .description {
+    line-height: 1.3;
   }
 
   .title {
@@ -24,13 +28,9 @@
 }
 
 @media (max-width: 768px) {
-  .section-contact {
+  .contact-section {
     .title {
       font-size: 22px;
-    }
-
-    .description {
-      font-size: 14px;
     }
 
     .card-container {

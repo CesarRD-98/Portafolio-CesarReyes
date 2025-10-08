@@ -2,7 +2,7 @@ import React from 'react'
 import { Contact } from '@/app/model/contact.model'
 import { contactIcon, contactType } from '@/app/utils/contactIcon'
 import styles from './contactCard.module.scss'
-import { useUser } from '@/app/context/userProfile/user.provider'
+import { useUser } from '@/app/context/user_profile/user.provider'
 
 export default function ContactCard() {
     const { user } = useUser()

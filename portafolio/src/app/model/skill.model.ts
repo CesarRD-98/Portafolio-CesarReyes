@@ -1,0 +1,6 @@
+export interface Skill {
+    id: number
+    name: string
+    logo: string
+    type: string
+}

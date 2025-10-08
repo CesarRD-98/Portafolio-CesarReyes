@@ -1,4 +1,4 @@
-import { useUser } from '@/app/context/userProfile/user.provider'
+import { useUser } from '@/app/context/user_profile/user.provider'
 import { Project } from '@/app/model/project.model'
 import Image from 'next/image'
 import Link from 'next/link'
