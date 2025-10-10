@@ -1,5 +1,5 @@
 'use client'
-import { useUser } from '@/app/context/user_profile/user.provider'
+import { useUserContext } from '@/app/context/user_profile/user.provider'
 import Image from 'next/image'
 import styles from './logosSkills.module.scss'
 import { Skill } from '@/app/model/skill.model'
@@ -8,7 +8,7 @@ import { SkillType } from '@/app/types/skill.type'
 import { FilterArray } from '@/app/utils/filterSkill'
 
 export default function LogosSkills() {
-    const { user } = useUser()
+    const { user } = useUserContext()
     const [skills, setSkills] = useState<Skill[]>([])
     const [filter, setFilter] = useState<SkillType>('all')
 
@@ -28,15 +28,15 @@ export default function LogosSkills() {
     return (
         <div className={styles.skill_container}>
             <div className={styles.skill_actions}>
-                {FilterArray.map(f => (
+                {FilterArray.map(value => (
                     <button
                         onClick={() => {
-                            setFilter(f)
-                            filterSkills(f)
+                            setFilter(value)
+                            filterSkills(value)
                         }}
-                        key={f}
-                        className={`${styles.btn} ${filter === f ? styles.active : ''}`}>
-                        {f === 'all' ? 'Todos' : f.charAt(0).toUpperCase() + f.slice(1)}
+                        key={value}
+                        className={`${styles.btn} ${filter === value ? styles.active : ''}`}>
+                        {value === 'all' ? 'Todos' : value.charAt(0).toUpperCase() + value.slice(1)}
                     </button>
                 ))}
             </div>

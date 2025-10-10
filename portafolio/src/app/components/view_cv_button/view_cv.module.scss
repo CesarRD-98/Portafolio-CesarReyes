@@ -1,0 +1,20 @@
+.btn_download {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 2rem auto;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 2px;
+  background-color: var(--btn-color);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: 0.1s ease;
+
+  &:hover {
+    background-color: #ab2727;
+    color: #fff;
+  }
+}

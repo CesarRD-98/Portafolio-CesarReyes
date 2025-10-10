@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
 import './footer.scss'
-import { useUser } from '@/app/context/user_profile/user.provider'
+import { useUserContext } from '@/app/context/user_profile/user.provider'
 
 export default function Footer() {
-    const { user } = useUser()
+    const { user } = useUserContext()
 
     return (
         <footer>

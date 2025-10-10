@@ -1,4 +1,4 @@
-import { useUser } from '@/app/context/user_profile/user.provider'
+import { useUserContext } from '@/app/context/user_profile/user.provider'
 import { Project } from '@/app/model/project.model'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,21 +7,33 @@ import { FaArrowUp } from 'react-icons/fa6'
 import styles from './projectCard.module.scss'
 
 export default function ProjectCardComponent() {
-    const { user } = useUser()
+    const { user } = useUserContext()
     const projects: Project[] = user?.projects ?? []
 
     return (
         <>
             {projects.length > 0 ? (
-                projects.map(p => (
-                    <div className={styles.card} key={p.id}>
-                        <Image src={p.imgUrl} alt={p.title} width={160} height={100} />
+                projects.map(project => (
+                    <div className={styles.card} key={project.id}>
+                        <div className={styles.img_container}>
+                            <Image
+                                src={project.imgUrl}
+                                alt={project.title}
+                                className={styles.img_cover}
+                                height={90}
+                                width={160}
+                            />
+                        </div>
                         <div className={styles.body}>
-                            <h4 className={styles.title}>{p.title}</h4>
-                            <p className={styles.description}>{p.description}</p>
-                            <p className={styles.stack}>{p.stack.join(', ')}</p>
-                            <p className={styles.role}>{p.role}</p>
-                            <Link href={p.link} className={styles.link}>
+                            <h4 className={styles.title}>{project.title}</h4>
+                            <p className={styles.description}>{project.description}</p>
+                            <p className={styles.stack}>{project.stack.join(', ')}</p>
+                            <p className={styles.role}>{project.role}</p>
+                            <Link
+                                href={project.link}
+                                className={styles.link}
+                                target='_blank'
+                                rel='noopener noreferrer'>
                                 Github
                                 <FaArrowUp className={styles.icon} />
                             </Link>

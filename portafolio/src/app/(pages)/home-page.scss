@@ -27,7 +27,7 @@
       gap: 1rem;
 
       .action__btn {
-        gap: 10px;
+        gap: 6px;
         padding: 14px 16px;
         font-size: 14px;
         background-color: transparent;
@@ -53,6 +53,11 @@
 
         .btn__icon--arrowUp {
           transform: rotate(45deg);
+          transition: 0.2s ease;
+        }
+
+        &:hover .btn__icon--arrowUp {
+          transform: rotate(90deg);
         }
       }
     }

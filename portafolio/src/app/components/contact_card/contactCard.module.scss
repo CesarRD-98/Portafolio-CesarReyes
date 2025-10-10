@@ -23,6 +23,13 @@
   }
 }
 
+.link {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .card {
     width: 100%;

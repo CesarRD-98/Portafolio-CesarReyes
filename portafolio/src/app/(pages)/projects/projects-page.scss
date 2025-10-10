@@ -18,8 +18,9 @@
 
   .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(620px, 1fr));
     justify-content: center;
+    align-items: start;
     gap: 1rem;
     margin-top: 2rem;
   }
