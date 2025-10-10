@@ -41,7 +41,7 @@ export default function Navbar() {
                         alt="logo"
                         height={512}
                         width={770} />
-                    <h4>Developer</h4>
+                    <h4>CesarDev</h4>
                 </Link>
             </div>
 
@@ -69,6 +69,9 @@ export default function Navbar() {
             {/* For mobiles */}
             <div className={`overlay ${isOpenMenu ? 'active' : 'close'}`} onClick={toggleMenu}>
                 <ul className='nav__menu' onClick={(e) => e.stopPropagation()}>
+                    <li>
+                        <h4 className='nav__menu--title'>Menú</h4>
+                    </li>
                     <li>
                         <Link href={'/'} className='nav__menu-item'>Inicio</Link>
                     </li>
