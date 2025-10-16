@@ -8,8 +8,8 @@ export default function Footer() {
 
     return (
         <footer>
-            {user === null ? <p>Todos los derechos resevados.</p> :
-                <p>&copy; {user?.year} {user?.author}. Todos los derechos resevados.</p>}
+            {user && (<p>&copy; {user?.year} {user?.author}.</p>)}
+            <p>César Reyes.</p>
         </footer>
     )
 }
