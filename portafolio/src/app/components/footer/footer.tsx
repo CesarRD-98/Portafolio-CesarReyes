@@ -8,8 +8,9 @@ export default function Footer() {
 
     return (
         <footer>
-            {user && (<p>&copy; {user?.year} {user?.author}.</p>)}
-            <p>César Reyes.</p>
+            {user ?
+                (<p>&copy; {user?.year} {user?.author}.</p>) :
+                (<p>&copy; César Reyes. </p>)}
         </footer>
     )
 }
