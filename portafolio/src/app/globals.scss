@@ -2,7 +2,7 @@
   --color-primary: #306dbc;
   --bg-color: #fff;
   --text-color: #1b1b1b;
-  --text-color-soft: #707070;
+  --text-color-soft: #7e7e7e;
   --btn-color: #efefef;
   --btn-color-hover: #d6d6d6;
   --border-color: #e6e6e6;
@@ -14,7 +14,7 @@
   --color-primary: #3681e3;
   --bg-color: #1b1b1b;
   --text-color: #eee;
-  --text-color-soft: #9c9c9c;
+  --text-color-soft: #a8a8a8;
   --btn-color: #5a5a5a;
   --btn-color-hover: #474646;
   --border-color: #5a5a5a;
@@ -51,5 +51,6 @@ body {
   padding: 8px;
   border: none;
   border-radius: 2px;
+  transition: all 0.1s ease;
   cursor: pointer;
 }
