@@ -1,16 +1,16 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { FaBars } from 'react-icons/fa'
-import { usePathname } from 'next/navigation'
+import React, {useEffect, useState} from 'react'
+import {FaBars} from 'react-icons/fa'
+import {usePathname} from 'next/navigation'
 import './navbar.scss'
-import { useWindowWidthContext } from '@/app/context/window_width/windowWidth.provider'
+import {useWindowWidthContext} from '@/app/context/window_width/windowWidth.provider'
 import ThemeButton from '../theme_button/themeButton'
 
 export default function Navbar() {
     const pathname = usePathname()
-    const { windowWidth } = useWindowWidthContext()
+    const {windowWidth} = useWindowWidthContext()
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
 
 
@@ -31,7 +31,7 @@ export default function Navbar() {
             <div
                 onClick={toggleMenu}
                 className='nav__toggle'>
-                <FaBars size={24} />
+                <FaBars size={24}/>
             </div>
             <div className="nav__logo">
                 <Link href={'/'} className='nav__logo-link'>
@@ -40,7 +40,7 @@ export default function Navbar() {
                         src="/dev-icon.png"
                         alt="logo"
                         height={512}
-                        width={770} />
+                        width={770}/>
                     <h4>CesarDev</h4>
                 </Link>
             </div>
@@ -61,9 +61,7 @@ export default function Navbar() {
             </ul>
 
             <div className='nav__theme'>
-                {windowWidth !== 0 && (
-                    <ThemeButton />
-                )}
+                {windowWidth !== 0 && (<ThemeButton/>)}
             </div>
 
             {/* For mobiles */}
