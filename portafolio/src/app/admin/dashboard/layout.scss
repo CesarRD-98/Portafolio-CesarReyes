@@ -1,18 +1,23 @@
 .grid {
   display: grid;
-  grid-template-columns: 1fr 5fr;
-  //background-color: #3681e3;
+  grid-template-columns: 18rem 1fr;
   min-height: 100dvh;
 }
 
-.col-span-1 {
+.aside {
   box-shadow: var(--shadow-color);
   background-color: var(--bg-color-soft);
+  pointer-events: auto;
   transition: background-color 0.1s ease;
+
+  .btn-logout {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
 }
 
-.col-span-5 {
-  //background-color: #936262;
+.main {
+  pointer-events: auto;
 
   h4 {
     padding: 1rem;

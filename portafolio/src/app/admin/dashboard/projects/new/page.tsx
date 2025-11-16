@@ -1,10 +1,9 @@
-'use client'
 import React from 'react'
 
-export default function DashboardPage() {
+export default function NewProjectPage() {
     return (
         <div className="">
-            <h4>Dashboard</h4>
+            <h4>Nuevo proyecto</h4>
         </div>
     )
 }

@@ -60,11 +60,41 @@
     color: #fff;
 
     &:active {
-        background-color: #315d97;
+      background-color: #315d97;
     }
 
     &:focus {
-        outline: 2px solid var(--text-color);
+      outline: 2px solid var(--text-color);
+    }
+  }
+
+  .btn-disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+
+    &.btn-submit:active {
+      background-color: var(--border-color);
+    }
+  }
+
+  .error-message {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: -0.5rem;
+  }
+
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid var(--bg-color);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
     }
   }
 }
