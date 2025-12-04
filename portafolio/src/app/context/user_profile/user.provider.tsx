@@ -10,7 +10,7 @@ export default function UserProvider({ children }: ChildrenModel) {
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
 
-    const id: number = 1
+    const id: string = '7d6b9036-0018-4365-ae2f-12640f1e3c9d' 
 
     const reloadUser = async () => {
         try {

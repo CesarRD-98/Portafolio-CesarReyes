@@ -4,7 +4,7 @@ import { FaRightToBracket } from 'react-icons/fa6'
 import './admin-page.scss'
 import { useRouter } from 'next/navigation'
 import { isEmail } from '../utils/isEmail'
-import { supabase } from '../lib/supabaseClient'
+import { loginServiceAuth } from '../services/auth.service'
 
 export default function AdminPage() {
     const router = useRouter()
@@ -19,25 +19,30 @@ export default function AdminPage() {
         e.preventDefault();
         if (!isValid) return
 
-        setLoading(true)
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        try {
+            setLoading(true)
+            const { error } = await loginServiceAuth({ email, password })
 
-        if (error) {
-            setError(error.message)
+            if (error) {
+                setError(error.message)
+                setLoading(false)
+                return
+            }
+
+            router.push('/admin/dashboard')
+            resetForm()
+        } catch (error: unknown) {
+            setError(error instanceof Error ? error.message : 'An unexpected error occurred')
+        } finally {
+            setIsValid(false)
             setLoading(false)
-            return
         }
-
-        router.push('/admin/dashboard')
-        resetForm()
     }
 
     const resetForm = () => {
         setEmail('')
         setPassword('')
         setError(null)
-        setIsValid(false)
-        setLoading(false)
     }
 
     useEffect(() => {
@@ -79,7 +84,7 @@ export default function AdminPage() {
                 <button
                     className={`btn btn-submit ${!isValid ? 'btn-disabled' : ''}`}
                     type='submit'
-                    disabled={!isValid}
+                    disabled={!isValid || loading}
                     onClick={handleSubmit}
                 >
                     {loading ? (
