@@ -6,9 +6,9 @@ import { User } from "../model/user.model"
 import { toCamelCase, toSnakeCase } from "../utils/caseConverter"
 
 export const UserService = {
-    async getUser(id: string): Promise<User | null> {
+    async getUser(id: number): Promise<User | null> {
         const { data: profilesData } = await supabase.from('profiles').select('*').eq('id', id).single()
-        console.log('profileData: ', profilesData)
+        
         if (!profilesData) return null
 
         const { data: contacts } = await supabase.from('contacts').select('*').eq('user_id', id)
