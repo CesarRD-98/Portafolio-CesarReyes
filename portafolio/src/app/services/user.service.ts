@@ -7,15 +7,16 @@ import { toCamelCase, toSnakeCase } from "../utils/caseConverter"
 
 export const UserService = {
     async getUser(id: number): Promise<User | null> {
-        const { data: userData } = await supabase.from('users').select('*').eq('id', id).single()
-        if (!userData) return null
+        const { data: profilesData } = await supabase.from('profiles').select('*').eq('id', id).single()
+        
+        if (!profilesData) return null
 
         const { data: contacts } = await supabase.from('contacts').select('*').eq('user_id', id)
         const { data: projects } = await supabase.from('projects').select('*').eq('user_id', id).order('id', { ascending: true })
         const { data: skills } = await supabase.from('skills').select('*').eq('user_id', id)
 
         return toCamelCase({
-            ...userData,
+            ...profilesData,
             contacts,
             projects,
             skills

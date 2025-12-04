@@ -6,6 +6,7 @@ export interface User {
     author: string
     shortBio: string
     fullBio: string
+    avatar?: string
     learningFocus: string
     year: number
     contacts: Contact[]

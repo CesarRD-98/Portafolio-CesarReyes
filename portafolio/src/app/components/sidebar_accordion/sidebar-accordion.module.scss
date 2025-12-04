@@ -1,0 +1,61 @@
+.sidebar {
+  width: 100%;
+  overflow: auto;
+  margin-bottom: 1rem;
+}
+
+.section_list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.section_button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+  border-radius: 2px;
+  background-color: var(--bg-color-soft);
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover {
+    background-color: var(--btn-color-hover);
+  }
+
+  .span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+.panel {
+  overflow: hidden;
+  display: grid;
+  transition: grid-template-rows 0.2s ease;
+}
+
+.panel_open {
+  grid-template-rows: 1fr;
+}
+
+.panel_closed {
+  grid-template-rows: 0fr;
+}
+
+.item_list {
+  list-style: none;
+  margin: 0 0 0 0.75rem;
+  padding: 0 0 0 0.75rem;
+  border-left: 2px dotted var(--text-color-soft);
+  min-height: 0;
+}
+
+.item {
+  margin: 0.125rem 0;
+}

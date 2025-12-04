@@ -9,7 +9,7 @@ export default function UserProvider({ children }: ChildrenModel) {
     const [user, setUser] = useState<User | null>(null)
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
-
+    
     const id: number = 1
 
     const reloadUser = async () => {

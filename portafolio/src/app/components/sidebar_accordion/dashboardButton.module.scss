@@ -1,0 +1,16 @@
+.link {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+  text-align: start;
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  transition: background-color 0.1s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--btn-color-hover);
+  }
+}
