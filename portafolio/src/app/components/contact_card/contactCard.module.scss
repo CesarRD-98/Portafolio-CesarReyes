@@ -1,3 +1,5 @@
+@use '../../variables.scss' as *;
+
 .card {
   width: 300px;
   height: 150px;
@@ -11,7 +13,7 @@
   transition: 0.1s ease;
 
   .title {
-    font-size: 20px;
+    font-size: $font-lg;
     margin-bottom: 1rem;
     color: var(--color-primary);
     font-weight: 500;
@@ -19,7 +21,17 @@
 
   .value {
     margin-top: 1rem;
-    font-size: 14px;
+    font-size: $font-sm;
+  }
+
+  @media (min-width: $mobile) {
+    .value {
+      font-size: $font-base;
+    }
+  }
+
+  @media(max-width: $tablet) {
+     width: 100%;
   }
 }
 
@@ -28,10 +40,4 @@
   color: var(--text-color);
   transition: 0.1s ease;
   cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .card {
-    width: 100%;
-  }
 }

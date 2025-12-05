@@ -20,8 +20,8 @@ export default function ProjectCardComponent() {
                                 src={project.imgUrl}
                                 alt={project.title}
                                 className={styles.img_cover}
-                                height={90}
-                                width={160}
+                                height={180}
+                                width={230}
                             />
                         </div>
                         <div className={styles.body}>
@@ -41,7 +41,7 @@ export default function ProjectCardComponent() {
                     </div>
                 ))
             ) : (
-                <p>Aun no hay proyectos para mostrar</p>
+                <p className='description'>Aun no hay proyectos para mostrar</p>
             )}
         </>
     )

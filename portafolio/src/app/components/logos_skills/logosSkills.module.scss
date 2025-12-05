@@ -1,3 +1,5 @@
+@use '../../variables.scss' as *;
+
 .skill_container {
   max-width: 700px;
   margin: 0 auto;
@@ -13,6 +15,7 @@
       border-radius: 2px;
       border: none;
       background-color: var(--btn-color);
+      font-size: $font-sm;
       font-weight: 300;
       color: var(--text-color);
       cursor: pointer;
@@ -49,8 +52,14 @@
 
       .name {
         margin: 0;
-        font-size: 14px;
+        font-size: $font-sm;
         font-weight: 300;
+      }
+
+      @media (min-width: $desktop) {
+        .name {
+          font-size: $font-base;
+        }
       }
     }
   }
