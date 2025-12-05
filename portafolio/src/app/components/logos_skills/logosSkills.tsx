@@ -30,18 +30,19 @@ export default function LogosSkills() {
             <div className={styles.skill_actions}>
                 {FilterArray.map(value => (
                     <button
+                        key={value}
+                        className={`${styles.btn} ${filter === value ? styles.active : ''}`}
                         onClick={() => {
                             setFilter(value)
                             filterSkills(value)
                         }}
-                        key={value}
-                        className={`${styles.btn} ${filter === value ? styles.active : ''}`}>
+                    >
                         {value === 'all' ? 'Todos' : value.charAt(0).toUpperCase() + value.slice(1)}
                     </button>
                 ))}
             </div>
             <div className={styles.skill_logo}>
-                {skills.length > 0 ? (
+                {skills.length > 0 && (
                     skills.map(skill => (
                         <div key={skill.id} className={styles.item}>
                             <Image
@@ -54,8 +55,6 @@ export default function LogosSkills() {
                             <p className={styles.name}>{skill.name}</p>
                         </div>
                     ))
-                ) : (
-                    <p>No se encontraron habilidades.</p>
                 )}
             </div>
         </div>

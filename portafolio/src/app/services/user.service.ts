@@ -7,7 +7,7 @@ import { toCamelCase, toSnakeCase } from "../utils/caseConverter"
 
 export const UserService = {
     async getUser(id: number): Promise<User | null> {
-        const { data: profilesData } = await supabase.from('profiles').select('*').eq('id', id).single()
+        const { data: profilesData } = await supabase.from('users').select('*').eq('id', id).single()
         
         if (!profilesData) return null
 
