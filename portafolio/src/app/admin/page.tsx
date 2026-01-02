@@ -31,10 +31,10 @@ export default function AdminPage() {
 
             router.push('/admin/dashboard')
             resetForm()
+
         } catch (error: unknown) {
             setError(error instanceof Error ? error.message : 'An unexpected error occurred')
         } finally {
-            setIsValid(false)
             setLoading(false)
         }
     }
