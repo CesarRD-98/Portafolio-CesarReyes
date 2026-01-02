@@ -32,7 +32,7 @@ export default function HomePage() {
             <Section id='home' className='home'>
                 <div className="home__col-left">
                     <h4>Hola, soy {user.author}</h4>
-                    <h2>Desarrollador Web Fullstack</h2>
+                    <h2>Desarrollador Web / Junior fullstack</h2>
                     <p>{user.shortBio}</p>
                     <div className="action">
                         <button
