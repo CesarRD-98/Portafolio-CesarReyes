@@ -9,6 +9,7 @@
   --shadow-color: 0 1px 6px rgba(50, 50, 50, 0.2);
   --bg-color-soft: #f5f8fa;
   --color-error: #cd463c;
+  --color-success: #4caf50;
 }
 
 [data-theme='dark'] {
@@ -22,6 +23,7 @@
   --shadow-color: 0 1px 6px rgba(162, 162, 162, 0.2);
   --bg-color-soft: #292929;
   --color-error: #ff4848;
+  --color-success: #4caf50;
 }
 
 html,
@@ -55,4 +57,104 @@ body {
   border-radius: 2px;
   transition: all 0.1s ease;
   cursor: pointer;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+}
+
+.form-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+
+  label {
+    position: absolute;
+    top: -0.5rem;
+    left: 0.75rem;
+    background-color: var(--bg-color);
+    font-size: 14px;
+    padding: 0 0.15rem;
+    color: var(--text-color-soft);
+    font-weight: 500;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 2px;
+    outline: none;
+    color: var(--text-color);
+    font-size: 14px;
+    font-family: var(--font-fira-sans), sans-serif;
+    background-color: var(--bg-color);
+    transition: border-color 0.1s ease, background-color 0.1s ease,
+      color 0.1s ease;
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
+  }
+
+  option {
+    // padding: 0.75rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  textarea {
+    line-height: 2;
+  }
+}
+
+.btn-submit {
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: var(--color-primary);
+  outline: 2px solid transparent;
+  color: #fff;
+
+  &:active {
+    background-color: #315d97;
+  }
+
+  &:focus {
+    outline: 2px solid var(--text-color);
+  }
+}
+
+.btn-disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+
+  &.btn-submit:active {
+    background-color: var(--border-color);
+  }
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--bg-color);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,14 +1,12 @@
-import React from 'react'
-import UserProvider from '../context/user_profile/user.provider'
 import { ChildrenModel } from '../model/children.model'
+import AuthProvider from '../context/auth/auth.provider'
 
 export default function layout({ children }: ChildrenModel) {
     return (
         <>
-            <UserProvider>
+            <AuthProvider>
                 {children}
-            </UserProvider>
-
+            </AuthProvider>
         </>
     )
 }

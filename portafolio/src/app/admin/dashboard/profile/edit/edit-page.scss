@@ -1,0 +1,10 @@
+.form-container {
+  .form-row-header {
+    display: flex;
+    gap: 1rem;
+
+    .form-group {
+      width: 100%;
+    }
+  }
+}

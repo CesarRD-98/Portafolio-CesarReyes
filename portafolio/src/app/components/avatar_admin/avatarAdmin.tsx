@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './avatar-admin.module.scss'
 import Image from "next/image";
-import {useUserContext} from "@/app/context/user_profile/user.provider";
+import { useAuthContext } from '@/app/context/auth/auth.provider';
 
 export default function AvatarAdmin() {
-    const {user} = useUserContext()
+    const { user } = useAuthContext()
 
     return (
         <div className={styles.avatar_container}>

@@ -4,38 +4,29 @@ import { FaRightToBracket } from 'react-icons/fa6'
 import './admin-page.scss'
 import { useRouter } from 'next/navigation'
 import { isEmail } from '../utils/isEmail'
-import { loginServiceAuth } from '../services/auth.service'
+import { useAuthContext } from '../context/auth/auth.provider'
 
 export default function AdminPage() {
     const router = useRouter()
+    const { loading, login } = useAuthContext()
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [isValid, setIsValid] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
-    const [loading, setLoading] = useState<boolean>(false)
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (!isValid) return
 
         try {
-            setLoading(true)
-            const { error } = await loginServiceAuth({ email, password })
-
-            if (error) {
-                setError(error.message)
-                setLoading(false)
-                return
-            }
-
+            await login(email, password)
             router.push('/admin/dashboard')
             resetForm()
         } catch (error: unknown) {
             setError(error instanceof Error ? error.message : 'An unexpected error occurred')
         } finally {
             setIsValid(false)
-            setLoading(false)
         }
     }
 

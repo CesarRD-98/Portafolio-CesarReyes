@@ -1,9 +1,14 @@
-import { supabase } from "@/app/lib/supabaseClient"
+import { supabase } from "@/app/lib/supabase"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(req: NextRequest) {
     try {
         const { email, password } = await req.json()
+
+        if (!email || !password) {
+            return NextResponse.json({ success: false, error: { message: 'Email and password are required', status: 400 } }, { status: 400 })
+        }
+
         const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
         if (error || !data.session) {
@@ -18,21 +23,8 @@ export async function POST(req: NextRequest) {
         const { access_token, refresh_token } = data.session
         const response = NextResponse.json({ success: true, data: { user: data.user ?? null } })
 
-        response.cookies.set('sb-access-token', access_token, {
-            httpOnly: true,
-            path: '/',
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60,
-        })
-
-        response.cookies.set('sb-refresh-token', refresh_token, {
-            httpOnly: true,
-            path: '/',
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 24 * 30,
-        })
+        setCookie(response, 'sb-access-token', access_token, 60 * 60)
+        setCookie(response, 'sb-refresh-token', refresh_token, 60 * 60 * 24 * 30)
 
         return response
     } catch (error: unknown) {
@@ -43,4 +35,16 @@ export async function POST(req: NextRequest) {
         )
 
     }
+}
+
+
+// function to set cookie
+const setCookie = (response: NextResponse, name: string, value: string, maxAge: number) => {
+    response.cookies.set(name, value, {
+        httpOnly: true,
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge,
+    })
 }

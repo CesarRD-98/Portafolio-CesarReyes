@@ -2,8 +2,26 @@ import React from 'react'
 
 export default function SkillPage() {
     return (
-        <div className="">
+        <section className="">
             <h4>Habilidades</h4>
-        </div>
+            <article>
+                <h2>Habilidades publicadas</h2>
+                <dl>
+                    <dt>Titulo</dt>
+                    <dd>Nombre</dd>
+
+                    <dt>Tipo de habilidad</dt>
+                    <dd>Texto corto</dd>
+
+                    <dt>Logo</dt>
+                    <dd>
+                        <img src="..." alt="Avatar del autor" />
+                    </dd>
+
+                    <dt>Última actualización</dt>
+                    <dd>10 enero 2026</dd>
+                </dl>
+            </article>
+        </section>
     )
 }

@@ -2,22 +2,20 @@ import { NextResponse } from "next/server"
 
 export async function POST() {
     const response = NextResponse.json({ success: true })
-
-    response.cookies.set('sb-access-token', '', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: -1
-    })
-
-    response.cookies.set('sb-refresh-token', '', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: -1
-    })
     
+    clearCookie(response, 'sb-access-token')
+    clearCookie(response, 'sb-refresh-token')
+
     return response
+}
+
+//function to clear cookie
+const clearCookie = (response: NextResponse, name: string) => {
+    response.cookies.set(name, '', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: -1
+    })
 }

@@ -9,13 +9,11 @@ export default function UserProvider({ children }: ChildrenModel) {
     const [user, setUser] = useState<User | null>(null)
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
-    
-    const id: number = 1
 
     const reloadUser = async () => {
         try {
             setLoading(true)
-            const data = await UserService.getUser(id)
+            const data = await UserService.getUser()
             if (data) setUser(data)
         } catch (err) {
             console.error(err)
