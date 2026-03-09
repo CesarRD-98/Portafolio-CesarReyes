@@ -1,8 +1,10 @@
 'use client';
 import { FileUploadField } from '@/app/components/fileUploadField/FileUploadField'
+import { useToastContext } from '@/app/components/toast/toast.provider';
 import React, { FormEvent, useState } from 'react'
 
 export default function NewProjectPage() {
+    const { showToast } = useToastContext();
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -13,6 +15,11 @@ export default function NewProjectPage() {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+        showToast({
+            title: 'Error',
+            message: "Hubo un error al agregar el nuevo proyecto",
+            type: 'error',
+        });
     }
 
     return (

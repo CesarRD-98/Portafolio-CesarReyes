@@ -7,35 +7,36 @@ export default function ProfilePage() {
             <h4>Perfil</h4>
             <article>
                 <h2>Perfil publicado</h2>
-                <dl>
-                    <dt>Autor</dt>
-                    <dd>Nombre del autor</dd>
-
-                    <dt>Short Bio</dt>
-                    <dd>Texto corto</dd>
-
-                    <dt>Full Bio</dt>
-                    <dd>Texto largo</dd>
-
-                    <dt>Learning Focus</dt>
-                    <dd>Ej. Frontend, Backend</dd>
-
-                    <dt>Year</dt>
-                    <dd>2026</dd>
-
-                    <dt>Avatar</dt>
-                    <dd>
-                        <img src="..." alt="Avatar del autor" />
-                    </dd>
-
-                    <dt>CV</dt>
-                    <dd>
-                        <a href="..." target="_blank">Descargar CV</a>
-                    </dd>
-
-                    <dt>Última actualización</dt>
-                    <dd>10 enero 2026</dd>
-                </dl>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Autor</th>
+                            <th>Biografía corta</th>
+                            <th>Biografía completa</th>
+                            <th>Enfoque de aprendizaje</th>
+                            <th>Año</th>
+                            <th>Avatar</th>
+                            <th>Hoja de vida</th>
+                            <th>Última actualización</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nombre del autor</td>
+                            <td>Texto corto</td>
+                            <td>Texto largo</td>
+                            <td>Ej. Frontend, Backend</td>
+                            <td>2026</td>
+                            <td>
+                                <img src="..." alt="Avatar del autor" />
+                            </td>
+                            <td>
+                                <a href="..." target="_blank">Descargar CV</a>
+                            </td>
+                            <td>10 enero 2026</td>
+                        </tr>
+                    </tbody>
+                </table>
             </article>
 
         </section>

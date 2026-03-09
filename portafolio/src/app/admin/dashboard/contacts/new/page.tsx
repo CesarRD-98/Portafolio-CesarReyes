@@ -1,7 +1,10 @@
 "use client";
+import { useToastContext } from '@/app/components/toast/toast.provider';
 import React, { FormEvent } from 'react'
 
 export default function NewContactPage() {
+    const { showToast } = useToastContext();
+
     const [title, setTitle] = React.useState('')
     const [value, setValue] = React.useState('')
     const [type, setType] = React.useState('')
@@ -9,6 +12,11 @@ export default function NewContactPage() {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
+        showToast({
+            title: 'Contacto creado',
+            message: `El contacto ha sido creado exitosamente.`,
+            type: 'success',
+        })
     }
     return (
         <section>
