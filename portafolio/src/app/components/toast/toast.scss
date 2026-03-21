@@ -16,24 +16,27 @@
   color: white;
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-  animation: toastSlideIn 0.3s ease forwards;
-  transition: transform 0.3s ease;
+
+  animation: toastSlideIn 0.3s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
 
   &.toast-exit {
-    animation: toastSlideOut 0.3s ease forwards;
+    animation: toastSlideOut 0.3s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
   }
 
   &-success {
     background: var(--color-success);
   }
+
   &-error {
     background: var(--color-error);
   }
+
   &-warning {
     background: var(--color-warning);
   }
+
   &-info {
     background: var(--color-info);
   }
@@ -77,8 +80,9 @@
 @keyframes toastSlideIn {
   from {
     transform: translateX(120%);
-    opacity: 0;
+    opacity: 0.5;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -90,8 +94,9 @@
     transform: translateX(0);
     opacity: 1;
   }
+
   to {
     transform: translateX(120%);
-    opacity: 0;
+    opacity: 0.5;
   }
 }

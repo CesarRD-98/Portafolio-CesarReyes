@@ -11,22 +11,45 @@ export const ToastProvider = ({ children }: ChildrenModel) => {
 
     const showToast = (toast: Omit<Toast, "id">) => {
         const id = crypto.randomUUID();
+        const duration = toast.duration ?? 4000;
 
         const newToast: Toast = {
             id,
-            duration: 3000,
+            duration,
+            closing: false,
             ...toast
         }
 
-        setToasts(prev => [newToast, ...prev].slice(0, 4));
+        setToasts(prev => {
+            let updatedToasts = [...prev, newToast];
+
+            if (updatedToasts.length > 4) {
+                const lastToast = updatedToasts[updatedToasts.length - 1];
+                closeToast(lastToast.id);
+                updatedToasts = updatedToasts.slice(0, 4);
+            }
+            return updatedToasts;
+        });
+
+        setTimeout(() => {
+            closeToast(id);
+        }, duration);
     };
 
+    const closeToast = (id: string) => {
+        setToasts(prev => prev.map(toast => toast.id === id ? { ...toast, closing: true } : toast));
+        setTimeout(() => {
+            removeToast(id);
+        }, 300);
+    };
+
+
     const removeToast = (id: string) => {
-        setToasts(toasts.filter(toast => toast.id !== id));
+        setToasts(prev => prev.filter(toast => toast.id !== id));
     };
 
     return (
-        <ToastContext.Provider value={{ toasts, showToast, removeToast }}>
+        <ToastContext.Provider value={{ toasts, showToast, closeToast }}>
             {children}
             <ToastContainer toasts={toasts} />
         </ToastContext.Provider>
