@@ -1,10 +1,10 @@
 'use client'
 
-import { useToastContext } from '@/app/components/toast/toast.provider'
-import Image from 'next/image'
-import './profile-page.scss'
+import { useToastContext } from '@/app/components/toast/toast.provider';
+import Image from 'next/image';
 import { useProfile } from '@/app/hooks/useProfile'
 import Loading from '@/app/components/loading/loading'
+import './profile-page.scss';
 
 export default function ProfilePage() {
     const { showToast } = useToastContext()
