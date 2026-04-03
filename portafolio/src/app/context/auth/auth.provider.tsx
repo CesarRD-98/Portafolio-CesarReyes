@@ -24,7 +24,6 @@ export default function AuthProvider({ children, initialUser }: AuthProviderProp
 
         const init = async () => {
             const { data } = await supabase.auth.getUser()
-            console.log('User data on init:', data)
             setUser(data.user)
         }
 

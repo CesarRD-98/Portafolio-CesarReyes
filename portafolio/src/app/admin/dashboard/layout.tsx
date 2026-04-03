@@ -3,6 +3,7 @@ import DashboardShell from "./shell"
 import { createSupabaseServerClient } from "@/app/lib/supabaseServer"
 import { ChildrenModel } from "@/app/model/children.model"
 import AuthProvider from "@/app/context/auth/auth.provider"
+import { ReactQueryProvider } from "@/app/context/react_query/reactQuery.provider"
 
 export default async function DashboardLayout({ children }: ChildrenModel) {
     const supabase = await createSupabaseServerClient()
@@ -16,7 +17,9 @@ export default async function DashboardLayout({ children }: ChildrenModel) {
     return (
         <AuthProvider initialUser={user}>
             <DashboardShell>
-                {children}
+                <ReactQueryProvider>
+                    {children}
+                </ReactQueryProvider>
             </DashboardShell>
         </AuthProvider>
     )
