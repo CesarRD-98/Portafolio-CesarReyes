@@ -5,17 +5,18 @@ import ThemeButton from '@/app/components/theme_button/themeButton'
 import { useWindowWidthContext } from '@/app/context/window_width/windowWidth.provider'
 import { ChildrenModel } from '@/app/model/children.model'
 import { FaArrowRightFromBracket } from 'react-icons/fa6'
-import { AuthService } from '@/app/services/auth.service'
 import { useRouter } from 'next/navigation'
 import './layout.scss'
+import { useAuthContext } from '@/app/context/auth/auth.provider'
 
 export default function DashboardShell({ children }: ChildrenModel) {
     const { windowWidth } = useWindowWidthContext()
+    const { logout } = useAuthContext()
     const router = useRouter()
 
     const handlerLogout = async () => {
-        const response = await AuthService.logout()
-        if (response) { router.refresh() }
+        const success = await logout();
+        if (success) { router.push('/admin') }
     }
     return (
         <div className="grid">

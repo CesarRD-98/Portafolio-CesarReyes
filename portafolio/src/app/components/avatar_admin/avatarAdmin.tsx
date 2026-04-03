@@ -11,7 +11,7 @@ export default function AvatarAdmin() {
             <div className={styles.avatar}>
                 <Image className={styles.avatar_img} src='/dev-icon.png' alt='avatar' height={512} width={770} />
             </div>
-            <p>{user?.author}</p>
+            <p>{user?.email}</p>
         </div>
     )
 }

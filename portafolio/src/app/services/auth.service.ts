@@ -18,7 +18,15 @@ export const AuthService = {
     },
     logout: async () => {
         try {
-            const response = await axios.post('/api/auth/logout', {}, { withCredentials: true })
+            const response = await axios.post('/api/auth/logout', { withCredentials: true })
+            return response.data
+        } catch (error: unknown) {
+            throw extractAxiosError(error)
+        }
+    },
+    getUser: async () => {
+        try {
+            const response = await axios.get('/api/auth/user', { withCredentials: true })
             return response.data
         } catch (error: unknown) {
             throw extractAxiosError(error)

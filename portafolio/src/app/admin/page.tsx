@@ -1,32 +1,36 @@
 'use client'
-import React, { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { FaRightToBracket } from 'react-icons/fa6'
 import './admin-page.scss'
 import { useRouter } from 'next/navigation'
 import { isEmail } from '../utils/isEmail'
-import { useAuthContext } from '../context/auth/auth.provider'
+import { AuthService } from '../services/auth.service'
 
 export default function AdminPage() {
     const router = useRouter()
-    const { loading, login } = useAuthContext()
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [isValid, setIsValid] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (!isValid) return
 
         try {
-            await login(email, password)
-            router.push('/admin/dashboard')
-            resetForm()
+            setLoading(true)
+            const success = await AuthService.login({ email, password })
+            if (success) {
+                router.push('/admin/dashboard')
+                resetForm()
+            }
         } catch (error: unknown) {
             setError(error instanceof Error ? error.message : 'An unexpected error occurred')
         } finally {
             setIsValid(false)
+            setLoading(false)
         }
     }
 
