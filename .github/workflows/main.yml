@@ -30,3 +30,6 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL_D: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL_D }}
+          NEXT_PUBLIC_SUPABASE_KEY_D: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY_D }}
