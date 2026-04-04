@@ -18,28 +18,31 @@ export default function LogosSkills() {
 
 
     const filterSkills = (type: SkillType): void => {
+        if (!user) return
         if (type === 'all') {
-            setSkills(user?.skills ?? [])
+            setSkills(user.skills ?? [])
         } else {
-            setSkills(user?.skills.filter(skill => skill.type === type) || [])
+            setSkills(user.skills?.filter(skill => skill.type === type) || [])
         }
     }
 
     return (
         <div className={styles.skill_container}>
             <div className={styles.skill_actions}>
-                {FilterArray.map(value => (
-                    <button
-                        key={value}
-                        className={`${styles.btn} ${filter === value ? styles.active : ''}`}
-                        onClick={() => {
-                            setFilter(value)
-                            filterSkills(value)
-                        }}
-                    >
-                        {value === 'all' ? 'Todos' : value.charAt(0).toUpperCase() + value.slice(1)}
-                    </button>
-                ))}
+                {user?.skills && (
+                    FilterArray.map(value => (
+                        <button
+                            key={value}
+                            className={`${styles.btn} ${filter === value ? styles.active : ''}`}
+                            onClick={() => {
+                                setFilter(value)
+                                filterSkills(value)
+                            }}
+                        >
+                            {value === 'all' ? 'Todos' : value.charAt(0).toUpperCase() + value.slice(1)}
+                        </button>
+                    ))
+                )}
             </div>
             <div className={styles.skill_logo}>
                 {skills.length > 0 && (

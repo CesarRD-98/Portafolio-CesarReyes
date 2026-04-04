@@ -9,7 +9,7 @@ export interface User {
     cvUrl: string
     learningFocus: string
     year: number
-    contacts?: Contact[]
-    projects?: Project[]
-    skills?: Skill[]
+    contacts: Contact[]
+    projects: Project[]
+    skills: Skill[]
 }
