@@ -10,7 +10,7 @@ export default function AvatarAdmin() {
     return (
         <div className={styles.avatar_container}>
             <div className={styles.avatar}>
-                <Image className={styles.avatar_img} src='/dev-icon.png' alt='avatar' height={512} width={770} />
+                <Image className={styles.avatar_img} src='/dev-icon.png' alt='avatar' height={512} width={770} loading='eager' />
             </div>
             <p>{profile?.author}</p>
         </div>

@@ -56,8 +56,7 @@ export default function HomePage() {
                         width={330}
                         src='/web-developer.png'
                         alt='web developer'
-                        loading='lazy'
-                        priority
+                        loading='eager'
                     />
                 </div>
             </Section>
