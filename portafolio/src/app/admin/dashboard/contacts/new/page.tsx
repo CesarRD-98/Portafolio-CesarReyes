@@ -1,5 +1,5 @@
 "use client";
-import { useToastContext } from '@/app/components/toast/toast.provider';
+import { useToastContext } from '@/app/context/toast/toast.provider';
 import React, { FormEvent } from 'react'
 
 export default function NewContactPage() {

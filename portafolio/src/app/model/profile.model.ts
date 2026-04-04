@@ -8,3 +8,14 @@ export interface Profile {
     cvUrl: string;
     updatedAt: string;
 }
+
+export interface ProfileDto {
+    author?: string;
+    shortBio?: string;
+    fullBio?: string;
+    learningFocus?: string;
+    year?: string;
+    avatar?: File;
+    cv?: File;
+    updatedAt?: Date;
+}

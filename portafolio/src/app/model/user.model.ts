@@ -6,10 +6,10 @@ export interface User {
     author: string
     shortBio: string
     fullBio: string
-    avatar?: string
+    cvUrl: string
     learningFocus: string
     year: number
-    contacts: Contact[]
-    projects: Project[]
-    skills: Skill[]
+    contacts?: Contact[]
+    projects?: Project[]
+    skills?: Skill[]
 }

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Toast } from "./toast.type";
+import { Toast } from "../../types/toast.type";
 
 export interface ToastCtxType {
     toasts: Toast[];

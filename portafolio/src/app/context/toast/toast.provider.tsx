@@ -1,10 +1,10 @@
 "use client";
 
 import { ChildrenModel } from "@/app/model/children.model";
-import { ToastContext } from "./toast.context";
+import { ToastContext } from "../../context/toast/toast.context";
 import { useContext, useState } from "react";
-import { Toast } from "./toast.type";
-import { ToastContainer } from "./ToastContainer";
+import { Toast } from "../../types/toast.type";
+import { ToastContainer } from "../../components/toast/ToastContainer";
 
 export const ToastProvider = ({ children }: ChildrenModel) => {
     const [toasts, setToasts] = useState<Toast[]>([]);

@@ -1,4 +1,4 @@
-import { Toast } from "./toast.type";
+import { Toast } from "../../types/toast.type";
 import { ToastItem } from "./ToastItem";
 import "./toast.scss";
 

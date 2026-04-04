@@ -2,8 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
+import { ChildrenModel } from '../model/children.model'
 
-export function ReactQueryProvider({ children }: { children: React.ReactNode }) {
+export function ReactQueryProvider({ children }: ChildrenModel) {
     const [queryClient] = useState(() => new QueryClient())
 
     return (

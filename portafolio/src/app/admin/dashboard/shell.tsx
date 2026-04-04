@@ -6,7 +6,7 @@ import { useWindowWidthContext } from '@/app/context/window_width/windowWidth.pr
 import { ChildrenModel } from '@/app/model/children.model'
 import { FaArrowRightFromBracket } from 'react-icons/fa6'
 import { useRouter } from 'next/navigation'
-import './layout.scss'
+import './shell.scss'
 import { useAuthContext } from '@/app/context/auth/auth.provider'
 
 export default function DashboardShell({ children }: ChildrenModel) {

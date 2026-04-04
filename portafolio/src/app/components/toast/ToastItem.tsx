@@ -1,5 +1,5 @@
-import { useToastContext } from "./toast.provider";
-import { Toast } from "./toast.type";
+import { useToastContext } from "../../context/toast/toast.provider";
+import { Toast } from "../../types/toast.type";
 import { XIcon } from "lucide-react";
 
 interface Props {

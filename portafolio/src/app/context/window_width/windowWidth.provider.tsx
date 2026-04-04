@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { WindowWidthContext } from './windowWidth.context'
 import { ChildrenModel } from '@/app/model/children.model'
 
-export default function WindowWidthProvider({ children }: ChildrenModel) {
+export function WindowWidthProvider({ children }: ChildrenModel) {
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
     useEffect(() => {

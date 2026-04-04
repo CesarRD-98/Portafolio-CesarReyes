@@ -1,6 +1,6 @@
 'use client';
 import { FileUploadField } from '@/app/components/fileUploadField/FileUploadField'
-import { useToastContext } from '@/app/components/toast/toast.provider';
+import { useToastContext } from '@/app/context/toast/toast.provider';
 import React, { FormEvent, useState } from 'react'
 
 export default function NewProjectPage() {

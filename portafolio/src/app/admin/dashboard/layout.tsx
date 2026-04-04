@@ -1,9 +1,10 @@
+'use server'
 import { redirect } from "next/navigation"
 import DashboardShell from "./shell"
 import { createSupabaseServerClient } from "@/app/lib/supabaseServer"
 import { ChildrenModel } from "@/app/model/children.model"
 import AuthProvider from "@/app/context/auth/auth.provider"
-import { ReactQueryProvider } from "@/app/context/react_query/reactQuery.provider"
+import { ReactQueryProvider } from "@/app/providers/reactQuery.provider"
 
 export default async function DashboardLayout({ children }: ChildrenModel) {
     const supabase = await createSupabaseServerClient()
@@ -16,11 +17,11 @@ export default async function DashboardLayout({ children }: ChildrenModel) {
 
     return (
         <AuthProvider initialUser={user}>
-            <DashboardShell>
-                <ReactQueryProvider>
+            <ReactQueryProvider>
+                <DashboardShell>
                     {children}
-                </ReactQueryProvider>
-            </DashboardShell>
+                </DashboardShell>
+            </ReactQueryProvider>
         </AuthProvider>
     )
 }

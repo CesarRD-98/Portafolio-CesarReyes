@@ -1,8 +1,8 @@
 'use client'
 
-import { useToastContext } from '@/app/components/toast/toast.provider';
+import { useToastContext } from '@/app/context/toast/toast.provider';
 import Image from 'next/image';
-import { useProfile } from '@/app/hooks/useProfile'
+import { useProfile } from '@/app/hooks/profile/useProfile'
 import Loading from '@/app/components/loading/loading'
 import './profile-page.scss';
 

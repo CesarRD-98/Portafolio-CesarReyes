@@ -11,6 +11,20 @@ export const ProfileService = {
         } catch (error: unknown) {
             throw extractAxiosError(error)
         }
+    },
+    updateProfile: async (formData: FormData) => {
+        try {
+            const response = await axios.patch('/api/profile',
+                formData,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    withCredentials: true
+                }
+            )
+            return response.data
+        } catch (error: unknown) {
+            throw extractAxiosError(error)
+        }
     }
 }
 

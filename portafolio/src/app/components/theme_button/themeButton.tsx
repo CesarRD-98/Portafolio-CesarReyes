@@ -1,4 +1,4 @@
-import { useThemeContext } from '@/app/context/change_theme/theme.provider'
+import { useThemeContext } from '@/app/providers/theme.provider'
 import { useWindowWidthContext } from '@/app/context/window_width/windowWidth.provider'
 import { FiSun, FiMoon } from 'react-icons/fi';
 import styles from './themeButton.module.scss'

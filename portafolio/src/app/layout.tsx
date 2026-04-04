@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import { Fira_Sans } from 'next/font/google'
-import ThemeProviderWrapper from "./context/change_theme/theme.provider";
-import WindowWidthProvider from "./context/window_width/windowWidth.provider";
-import { ToastProvider } from "./components/toast/toast.provider";
+import { ThemeProviderWrapper } from "./providers/theme.provider";
+import { WindowWidthProvider } from "./context/window_width/windowWidth.provider";
+import { ToastProvider } from "./context/toast/toast.provider";
 
 export const metadata: Metadata = {
     title: "Portafolio - César Reyes",
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: Readonly<{
             <body>
                 <ThemeProviderWrapper>
                     <WindowWidthProvider>
-                        <ToastProvider> 
+                        <ToastProvider>
                             {children}
                         </ToastProvider >
                     </WindowWidthProvider>
