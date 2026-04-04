@@ -1,4 +1,4 @@
-import React from 'react'
+import Image from "next/image"
 
 export default function ProjectsPage() {
     return (
@@ -24,7 +24,7 @@ export default function ProjectsPage() {
 
                     <dt>Imagen</dt>
                     <dd>
-                        <img src="..." alt="Avatar del autor" />
+                        <Image src="..." alt="Avatar del autor" />
                     </dd>
 
                     <dt>Última actualización</dt>

@@ -8,6 +8,8 @@ export default function NewSkillPage() {
     const [image, setImage] = useState<File | null>(null)
 
     const handleSubmit = (e: React.FormEvent) => {
+        const formData = new FormData();
+        if (image) { formData.append('image', image) }
         e.preventDefault()
     }
     return (

@@ -15,6 +15,10 @@ export default function NewProjectPage() {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        if (image) { formData.append('image', image) }
+
         showToast({
             title: 'Error',
             message: "Hubo un error al agregar el nuevo proyecto",

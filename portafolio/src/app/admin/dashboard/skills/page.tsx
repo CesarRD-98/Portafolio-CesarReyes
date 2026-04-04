@@ -1,4 +1,4 @@
-import React from 'react'
+import Image from "next/image"
 
 export default function SkillPage() {
     return (
@@ -15,7 +15,7 @@ export default function SkillPage() {
 
                     <dt>Logo</dt>
                     <dd>
-                        <img src="..." alt="Avatar del autor" />
+                        <Image src="..." alt="Avatar del autor" />
                     </dd>
 
                     <dt>Última actualización</dt>

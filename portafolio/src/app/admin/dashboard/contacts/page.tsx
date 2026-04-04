@@ -1,4 +1,4 @@
-import React from 'react'
+import Image from 'next/image'
 
 export default function ContactPage() {
     return (
@@ -18,7 +18,7 @@ export default function ContactPage() {
 
                     <dt>Logo</dt>
                     <dd>
-                        <img src="..." alt="Avatar del autor" />
+                        <Image src="..." alt="Logo del contacto" />
                     </dd>
 
                     <dt>Última actualización</dt>
