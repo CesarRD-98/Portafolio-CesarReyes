@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { ChildrenProps } from '@/app/types/children.type'
 import { useAuthContext } from '@/app/modules/auth/auth.context'
-import { LogOut, Menu } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 import AvatarAdmin from '@/app/components/ui/avatar_admin/AvatarAdmin'
 import Sidebar from '@/app/components/ui/sidebar_accordion/SidebarAccordion'
 
