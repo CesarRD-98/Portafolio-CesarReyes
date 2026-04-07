@@ -1,97 +1,146 @@
 'use client'
-import { FormEvent, useEffect, useState } from 'react'
+
+import { FormEvent, useState } from 'react'
 import { FaRightToBracket } from 'react-icons/fa6'
-import './admin-page.scss'
 import { useRouter } from 'next/navigation'
 import { isEmail } from '../utils/isEmail'
-import { AuthService } from '../services/auth.service'
+import { AuthService } from '../modules/auth/auth.service'
 
 export default function AdminPage() {
     const router = useRouter()
 
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [isValid, setIsValid] = useState<boolean>(false)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState<string | null>(null)
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState(false)
+
+    const isValid =
+        email.trim() !== '' &&
+        password.trim() !== '' &&
+        isEmail(email)
 
     const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
+        e.preventDefault()
         if (!isValid) return
 
         try {
             setLoading(true)
+            setError(null)
+
             const success = await AuthService.login({ email, password })
+
             if (success) {
                 router.push('/admin/dashboard')
-                resetForm()
             }
-        } catch (error: unknown) {
-            setError(error instanceof Error ? error.message : 'An unexpected error occurred')
+        } catch (err: unknown) {
+            setError(
+                err instanceof Error
+                    ? err.message
+                    : 'Error al iniciar sesión'
+            )
         } finally {
-            setIsValid(false)
             setLoading(false)
         }
     }
 
-    const resetForm = () => {
-        setEmail('')
-        setPassword('')
-        setError(null)
-    }
-
-    useEffect(() => {
-        const emailRequired: boolean = email.trim() !== '' ? true : false
-        const passwordRequired: boolean = password.trim() !== '' ? true : false
-        const isEmailValid = (): boolean => {
-            if (!isEmail(email)) {
-                setError('Ingresa un correo válido')
-                return false
-            } else {
-                setError(null)
-            }
-            return true
-        }
-
-        setIsValid(() => {
-            if (emailRequired && passwordRequired && isEmailValid()) {
-                return true
-            }
-            return false
-        })
-    }, [email, password])
-
-
+    
 
     return (
-        <div className='admin-page-container'>
-            <h3 className='title'>Verifica que eres el administrador</h3>
-            <form className="form-container">
-                <div className="form-group">
-                    <label>Correo</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className="
+                min-h-screen flex items-center justify-center
+                bg-white dark:bg-neutral-900
+                px-4
+                ">
+
+            {/* CARD */}
+            <div className="
+                    w-full max-w-md
+                    p-8 rounded-xl
+                    border border-neutral-200 dark:border-neutral-800
+                    bg-white/60 dark:bg-neutral-900/60
+                    backdrop-blur-md
+                    flex flex-col gap-6
+                ">
+
+                {/* HEADER */}
+                <div>
+                    <h1 className="text-xl font-semibold text-neutral-900 dark:text-white">
+                        Acceso administrador
+                    </h1>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                        Verifica tu identidad para continuar
+                    </p>
                 </div>
-                <div className="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                {error && <p className="error-message">{error}</p>}
-                <button
-                    className={`btn btn-submit ${!isValid ? 'btn-disabled' : ''}`}
-                    type='submit'
-                    disabled={!isValid || loading}
-                    onClick={handleSubmit}
-                >
-                    {loading ? (
-                        <div className="spinner"></div>
-                    ) : (
-                        <>
-                            Verificar
-                            < FaRightToBracket />
-                        </>
+
+                {/* FORM */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
+                    {/* EMAIL */}
+                    <div className="flex flex-col gap-1">
+                        <label className="text-sm text-neutral-800 dark:text-neutral-200">
+                            Correo
+                        </label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="
+                                px-3 py-2 rounded-md
+                                border border-neutral-300 dark:border-neutral-700
+                                bg-white dark:bg-neutral-800
+                                text-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-600/75"/>
+                    </div>
+
+                    {/* PASSWORD */}
+                    <div className="flex flex-col gap-1">
+                        <label className="text-sm text-neutral-800 dark:text-neutral-200">
+                            Contraseña
+                        </label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="
+                                px-3 py-2 rounded-md
+                                border border-neutral-300 dark:border-neutral-700
+                                bg-white dark:bg-neutral-800
+                                text-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-600/75"/>
+                    </div>
+
+                    {/* ERROR */}
+                    {error && (
+                        <p className="text-sm text-red-500">
+                            {error}
+                        </p>
                     )}
-                </button>
-            </form>
+
+                    {/* BUTTON */}
+                    <button
+                        type="submit"
+                        disabled={!isValid || loading}
+                        className={`
+                                mt-2 inline-flex items-center justify-center gap-2
+                                px-4 py-2 rounded-md text-sm font-medium
+                                transition-all duration-200 ease-out
+                                ${isValid
+                                ? 'bg-blue-600 text-white hover:bg-blue-500 cursor-pointer'
+                                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-400 cursor-not-allowed'
+                            }`}>
+                        {loading ? (
+                            <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+                        ) : (
+                            <>
+                                Verificar
+                                <FaRightToBracket />
+                            </>
+                        )}
+                    </button>
+
+                </form>
+            </div>
+
         </div>
     )
 }

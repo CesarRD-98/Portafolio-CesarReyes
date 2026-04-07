@@ -1,18 +1,19 @@
-'use client';
-import { FormEvent, useEffect, useState } from 'react'
-import { FileUploadField } from '@/app/components/fileUploadField/FileUploadField';
-import { useToastContext } from '@/app/context/toast/toast.provider';
-import { useProfile } from '@/app/hooks/profile/useProfile';
-import { useUpdateProfile } from '@/app/hooks/profile/useUpdateProfile';
-import './edit-page.scss';
-import { ProfileDto } from '@/app/model/profile.model';
+'use client'
+
+import { FormEvent, useEffect, useState } from "react"
+import { FileUploadField } from "@/app/components/ui/FileUploadField"
+import { useToastContext } from "@/app/hooks/toast/toast.context"
+import { useProfile } from "@/app/modules/profile/hooks/useProfile"
+import { useUpdateProfile } from "@/app/modules/profile/hooks/useUpdateProfile"
+import { ProfileDto } from "@/app/modules/profile/profile.types"
 
 export default function EditProfilePage() {
-    const { showToast } = useToastContext();
-    const { data: profile } = useProfile();
-    const { mutate, isPending } = useUpdateProfile();
+    const { showToast } = useToastContext()
+    const { data: profile } = useProfile()
+    const { mutate, isPending } = useUpdateProfile()
 
     const [initialForm, setInitialForm] = useState<Partial<ProfileDto> | null>(null)
+
     const [form, setForm] = useState<ProfileDto>({
         author: '',
         year: '',
@@ -21,57 +22,67 @@ export default function EditProfilePage() {
         learningFocus: '',
     })
 
-    const [cv, setCv] = useState<File | null>(null);
-    const [avatar, setAvatar] = useState<File | null>(null);
+    const [cv, setCv] = useState<File | null>(null)
+    const [avatar, setAvatar] = useState<File | null>(null)
 
-    const hasChanges = initialForm
-        ? (
-            form.author !== initialForm.author ||
-            form.year !== initialForm.year ||
-            form.shortBio !== initialForm.shortBio ||
-            form.fullBio !== initialForm.fullBio ||
-            form.learningFocus !== initialForm.learningFocus ||
-            avatar !== null ||
-            cv !== null
-        )
-        : false;
-
-    const handleChange = (field: string, value: string) => {
+    const handleChange = <K extends keyof ProfileDto>(
+        field: K,
+        value: ProfileDto[K]
+    ) => {
         setForm(prev => ({
             ...prev,
             [field]: value
         }))
     }
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
+    const hasChanges = initialForm
+        ? Object.keys(form).some((key) => {
+            const k = key as keyof ProfileDto
+            return (form[k] ?? '') !== (initialForm[k] ?? '')
+        }) || avatar !== null || cv !== null
+        : false
+
+    const buildFormData = () => {
+        if (!initialForm) return null
 
         const formData = new FormData();
-        if (!initialForm) return;
 
-        if (form.author !== initialForm.author) { formData.append('author', form.author ?? '') }
-        if (form.year !== initialForm.year) { formData.append('year', form.year ?? '') }
-        if (form.shortBio !== initialForm.shortBio) { formData.append('shortBio', form.shortBio ?? '') }
-        if (form.fullBio !== initialForm.fullBio) { formData.append('fullBio', form.fullBio ?? '') }
-        if (form.learningFocus !== initialForm.learningFocus) { formData.append('learningFocus', form.learningFocus ?? '') }
-        if (avatar) { formData.append('avatar', avatar) }
-        if (cv) { formData.append('cv', cv) }
+        (Object.keys(form) as (keyof ProfileDto)[]).forEach((key) => {
+            const current = form[key] ?? ''
+            const initial = initialForm[key] ?? ''
+
+            if (current !== initial) {
+                formData.append(key, String(current))
+            }
+        })
+
+        if (avatar) formData.append('avatar', avatar)
+        if (cv) formData.append('cv', cv)
+
+        return formData
+    }
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault()
+
+        const formData = buildFormData()
+        if (!formData) return
 
         mutate(formData, {
             onSuccess: () => {
                 showToast({
                     title: 'Perfil actualizado',
                     message: 'El perfil ha sido actualizado exitosamente.',
-                    type: 'success',
+                    type: 'success'
                 })
-                setCv(null);
-                setAvatar(null);
+                setCv(null)
+                setAvatar(null)
             },
             onError: (error) => {
                 showToast({
                     title: 'Error al actualizar perfil',
                     message: error instanceof Error ? error.message : 'Error desconocido',
-                    type: 'error',
+                    type: 'error'
                 })
             }
         })
@@ -92,56 +103,195 @@ export default function EditProfilePage() {
         }
     }, [profile])
 
-
     return (
-        <section>
-            <h4>Editar Perfil</h4>
-            <article>
-                <form className='form-container' onSubmit={handleSubmit}>
-                    <div className="form-row-header">
-                        <div className="form-group">
-                            <label>Autor:</label>
-                            <input type="text" className="" value={form.author} onChange={e => handleChange('author', e.target.value)}></input>
-                        </div>
-                        <div className="form-group">
-                            <label>Año:</label>
-                            <input inputMode='numeric' pattern='[0-9]{4}' maxLength={4} className="" value={form.year} onChange={e => handleChange('year', e.target.value)} />
-                        </div>
+        <section className="flex flex-col gap-8">
+
+            {/* HEADER */}
+            <div className="max-w-2xl space-y-1">
+                <h1 className="text-3xl font-semibold text-neutral-900 dark:text-white">
+                    Editar Perfil
+                </h1>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                    Actualiza la información pública de tu portafolio
+                </p>
+            </div>
+
+            {/* FORM CARD */}
+            <form
+                onSubmit={handleSubmit}
+                className="
+                    p-6 rounded-xl
+                    border border-neutral-200 dark:border-neutral-800
+                    bg-white/60 dark:bg-neutral-900/60
+                    backdrop-blur-md
+                    flex flex-col gap-8
+                    "
+            >
+
+                {/* GRID */}
+                <div className="grid gap-6 md:grid-cols-2">
+
+                    {/* AUTHOR */}
+                    <div className="flex flex-col gap-2">
+                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                            Autor
+                        </label>
+                        <input
+                            value={form.author}
+                            onChange={(e) => handleChange('author', e.target.value)}
+                            placeholder="Tu nombre o alias"
+                            className="
+                                w-full px-3 py-2.5 rounded-lg text-sm
+                                border border-neutral-200 dark:border-neutral-700
+                                bg-white/70 dark:bg-neutral-800/70
+                                text-neutral-900 dark:text-white
+                                placeholder:text-neutral-400
+                                transition-all duration-200
+                                focus:outline-none focus:border-blue-500
+                                focus:ring-2 focus:ring-blue-500/20
+                                hover:border-neutral-300 dark:hover:border-neutral-600
+                            "
+                        />
                     </div>
-                    <div className="form-group">
-                        <label>Biografía corta:</label>
-                        <textarea name="" id="" rows={2} value={form.shortBio} onChange={e => handleChange('shortBio', e.target.value)}></textarea>
+
+                    {/* YEAR */}
+                    <div className="flex flex-col gap-2">
+                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                            Año
+                        </label>
+                        <input
+                            inputMode="numeric"
+                            maxLength={4}
+                            value={form.year}
+                            onChange={(e) => handleChange('year', e.target.value)}
+                            placeholder="2026"
+                            className="
+                                w-full px-3 py-2.5 rounded-lg text-sm
+                                border border-neutral-200 dark:border-neutral-700
+                                bg-white/70 dark:bg-neutral-800/70
+                                text-neutral-900 dark:text-white
+                                placeholder:text-neutral-400
+                                transition-all duration-200
+                                focus:outline-none focus:border-blue-500
+                                focus:ring-2 focus:ring-blue-500/20
+                                hover:border-neutral-300 dark:hover:border-neutral-600
+                            "/>
                     </div>
-                    <div className="form-group">
-                        <label>Biografía completa:</label>
-                        <textarea name="" id="" rows={4} value={form.fullBio} onChange={e => handleChange('fullBio', e.target.value)}></textarea>
+
+                </div>
+
+                {/* TEXTAREAS */}
+                <div className="flex flex-col gap-6">
+
+                    <div className="flex flex-col gap-2">
+                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                            Biografía corta
+                        </label>
+                        <textarea
+                            rows={2}
+                            value={form.shortBio}
+                            onChange={(e) => handleChange('shortBio', e.target.value)}
+                            placeholder="Resumen breve sobre ti"
+                            className="
+                                w-full px-3 py-2.5 rounded-lg text-sm
+                                border border-neutral-200 dark:border-neutral-700
+                                bg-white/70 dark:bg-neutral-800/70
+                                text-neutral-900 dark:text-white
+                                placeholder:text-neutral-400
+                                transition-all duration-200
+                                focus:outline-none focus:border-blue-500
+                                focus:ring-2 focus:ring-blue-500/20
+                                hover:border-neutral-300 dark:hover:border-neutral-600
+                                resize-none leading-relaxed
+                            "/>
                     </div>
-                    <div className="form-group">
-                        <label>Enfoque:</label>
-                        <textarea name="" id="" rows={2} value={form.learningFocus} onChange={e => handleChange('learningFocus', e.target.value)}></textarea>
+
+                    <div className="flex flex-col gap-2">
+                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                            Biografía completa
+                        </label>
+                        <textarea
+                            rows={4}
+                            value={form.fullBio}
+                            onChange={(e) => handleChange('fullBio', e.target.value)}
+                            placeholder="Describe tu experiencia, stack y trayectoria"
+                            className="
+                                w-full px-3 py-2.5 rounded-lg text-sm
+                                border border-neutral-200 dark:border-neutral-700
+                                bg-white/70 dark:bg-neutral-800/70
+                                text-neutral-900 dark:text-white
+                                placeholder:text-neutral-400
+                                transition-all duration-200
+                                focus:outline-none focus:border-blue-500
+                                focus:ring-2 focus:ring-blue-500/20
+                                hover:border-neutral-300 dark:hover:border-neutral-600
+                                resize-none leading-relaxed"/>
                     </div>
+
+                    <div className="flex flex-col gap-2">
+                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                            Enfoque
+                        </label>
+                        <textarea
+                            rows={2}
+                            value={form.learningFocus}
+                            onChange={(e) => handleChange('learningFocus', e.target.value)}
+                            placeholder="¿Qué estás aprendiendo actualmente?"
+                            className="
+                                w-full px-3 py-2.5 rounded-lg text-sm
+                                border border-neutral-200 dark:border-neutral-700
+                                bg-white/70 dark:bg-neutral-800/70
+                                text-neutral-900 dark:text-white
+                                placeholder:text-neutral-400
+                                transition-all duration-200
+                                focus:outline-none focus:border-blue-500
+                                focus:ring-2 focus:ring-blue-500/20
+                                hover:border-neutral-300 dark:hover:border-neutral-600
+                                resize-none leading-relaxed"/>
+                    </div>
+
+                </div>
+
+                {/* FILES */}
+                <div className="grid gap-6 md:grid-cols-2">
                     <FileUploadField
-                        label="Avatar:"
-                        helperText="Formatos permitidos: JPG, PNG o GIF"
+                        label="Avatar"
+                        helperText="JPG, PNG o GIF"
                         accept=".jpg,.jpeg,.png,.gif"
                         onFileSelect={setAvatar}
                     />
 
                     <FileUploadField
-                        label="Hoja de vida:"
-                        helperText="Formatos permitidos: PDF, DOCX"
+                        label="CV"
+                        helperText="PDF o DOCX"
                         accept=".pdf,.doc,.docx"
                         onFileSelect={setCv}
                     />
+                </div>
 
-                    <button type="submit" className={`btn btn-submit ${!hasChanges ? 'btn-disabled' : ''}`} disabled={isPending || !hasChanges}>
-                        {isPending
-                            ? <div className="spinner"></div>
-                            : 'Guardar cambios'
-                        }
+                {/* ACTIONS */}
+                <div className="flex justify-end pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                    <button
+                        type="submit"
+                        disabled={!hasChanges || isPending}
+                        className={`
+                                inline-flex items-center gap-2
+                                px-5 py-2.5 rounded-lg text-sm font-medium
+                                transition-all duration-200
+                                ${hasChanges
+                                ? 'bg-blue-600 text-white hover:bg-blue-500 shadow-sm hover:shadow-md'
+                                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-400 cursor-not-allowed'
+                            }`}>
+                        {isPending ? (
+                            <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                            'Guardar cambios'
+                        )}
                     </button>
-                </form>
-            </article>
+                </div>
+
+            </form>
+
         </section>
     )
 }

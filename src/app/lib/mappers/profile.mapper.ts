@@ -1,4 +1,4 @@
-import { Profile } from "@/app/model/profile.model";
+import { Profile } from "@/app/modules/profile/profile.types";
 
 export function mapFormDataToProfile(
     formData: FormData

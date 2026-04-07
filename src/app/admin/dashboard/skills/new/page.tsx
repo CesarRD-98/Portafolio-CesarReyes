@@ -1,5 +1,5 @@
 "use client";
-import { FileUploadField } from '@/app/components/fileUploadField/FileUploadField'
+import { FileUploadField } from '@/app/components/ui/FileUploadField'
 import React, { useState } from 'react'
 
 export default function NewSkillPage() {

@@ -24,7 +24,7 @@ export default function ProjectsPage() {
 
                     <dt>Imagen</dt>
                     <dd>
-                        <Image src="..." alt="Avatar del autor" />
+                        <Image src="/" width={50} height={50} alt="Avatar del autor" />
                     </dd>
 
                     <dt>Última actualización</dt>

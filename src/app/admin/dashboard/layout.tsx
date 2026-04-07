@@ -2,11 +2,11 @@
 import { redirect } from "next/navigation"
 import DashboardShell from "./shell"
 import { createSupabaseServerClient } from "@/app/lib/supabaseServer"
-import { ChildrenModel } from "@/app/model/children.model"
-import AuthProvider from "@/app/context/auth/auth.provider"
 import { ReactQueryProvider } from "@/app/providers/reactQuery.provider"
+import { ChildrenProps } from "@/app/types/children.type"
+import AuthProvider from "@/app/modules/auth/auth.context"
 
-export default async function DashboardLayout({ children }: ChildrenModel) {
+export default async function DashboardLayout({ children }: ChildrenProps) {
     const supabase = await createSupabaseServerClient()
 
     const { data: { user } } = await supabase.auth.getUser()

@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-fira-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+
+/*======
+  LOADER
+======*/
+
+/* TRACK BASE */
+.cr-track {
+  fill: none;
+  stroke: #e5e5e5;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dark .cr-track {
+  stroke: #404040;
+}
+
+/* ANIMACIÓN LIMPIA */
+.cr-animated-path {
+  fill: none;
+  stroke: #2563eb;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.4));
+
+  stroke-dasharray: 236;
+  animation: cr-loop 1.6s linear infinite;
+}
+
+/* LOOP PERFECTO */
+@keyframes cr-loop {
+  0% {
+    stroke-dashoffset: 236;
+  }
+
+  100% {
+    stroke-dashoffset: -236;
+  }
+}
+
+
+
+/*=======
+TOAST
+=======*/
+
+@keyframes toast-progress {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+.animate-toast-progress {
+  animation: toast-progress linear forwards;
+}

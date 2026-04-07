@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import "./globals.scss";
-import { Fira_Sans } from 'next/font/google'
-import { ThemeProviderWrapper } from "./providers/theme.provider";
-import { WindowWidthProvider } from "./context/window_width/windowWidth.provider";
-import { ToastProvider } from "./context/toast/toast.provider";
+import { Fira_Sans } from "next/font/google";
+import "./globals.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-    title: "Portafolio - César Reyes",
-    description: "Portafolio de proyectos y habilidades de César Reyes",
+    title: {
+        default: "Portafolio - César Reyes",
+        template: "%s | César Reyes"
+    },
+    description: "Portafolio de César Reyes, desarrollador web",
 };
 
 const firaSans = Fira_Sans({
@@ -17,19 +18,13 @@ const firaSans = Fira_Sans({
     variable: "--font-fira-sans",
 });
 
-export default function RootLayout({ children }: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="es" className={firaSans.variable} suppressHydrationWarning>
-            <body>
-                <ThemeProviderWrapper>
-                    <WindowWidthProvider>
-                        <ToastProvider>
-                            {children}
-                        </ToastProvider >
-                    </WindowWidthProvider>
-                </ThemeProviderWrapper>
+            <body className="font-sans min-h-screen flex flex-col">
+                <Providers>
+                    {children}
+                </Providers>
             </body>
         </html>
     );

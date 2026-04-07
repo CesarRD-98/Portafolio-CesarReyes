@@ -18,7 +18,7 @@ export default function ContactPage() {
 
                     <dt>Logo</dt>
                     <dd>
-                        <Image src="..." alt="Logo del contacto" />
+                        <Image src="/" width={50} height={50} alt="Logo del contacto" />
                     </dd>
 
                     <dt>Última actualización</dt>

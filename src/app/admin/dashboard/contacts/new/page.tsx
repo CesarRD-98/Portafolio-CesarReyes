@@ -1,5 +1,6 @@
 "use client";
-import { useToastContext } from '@/app/context/toast/toast.provider';
+
+import { useToastContext } from '@/app/hooks/toast/toast.context';
 import React, { FormEvent } from 'react'
 
 export default function NewContactPage() {
@@ -15,7 +16,7 @@ export default function NewContactPage() {
         showToast({
             title: 'Contacto creado',
             message: `El contacto ha sido creado exitosamente.`,
-            type: 'success',
+            type: 'success'
         })
     }
     return (
