@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { FaRightToBracket } from 'react-icons/fa6'
 import { useRouter } from 'next/navigation'
 import { isEmail } from '../utils/isEmail'
@@ -43,7 +43,12 @@ export default function AdminPage() {
         }
     }
 
-    
+    useEffect(() => {
+        const emailError: string | null = (email.trim() !== "" && !isEmail(email)) ? "Formato de correo inválido" : null;
+        setError(emailError)
+    }, [email])
+
+
 
     return (
         <div className="
