@@ -30,7 +30,7 @@ export const ToastItem = ({ toast }: { toast: Toast }) => {
             className={`
                 group relative flex items-start gap-3
                 w-full max-w-sm
-                p-4 rounded-lg
+                p-4 rounded-md
                 border border-neutral-200 dark:border-neutral-800
                 bg-white/80 dark:bg-neutral-900/80
                 backdrop-blur-md shadow-lg
@@ -92,7 +92,7 @@ export const ToastItem = ({ toast }: { toast: Toast }) => {
             </button>
 
             {/* PROGRESS */}
-            <div className="absolute bottom-0 left-0 h-[2px] w-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden rounded-b-xl">
+            <div className="absolute bottom-0 left-0 h-[2px] w-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden rounded-b-lg">
                 <div
                     className="h-full bg-blue-500 animate-toast-progress"
                     style={{

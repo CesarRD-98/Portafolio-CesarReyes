@@ -6,6 +6,10 @@ import { useToastContext } from "@/app/hooks/toast/toast.context"
 import { useProfile } from "@/app/modules/profile/hooks/useProfile"
 import { useUpdateProfile } from "@/app/modules/profile/hooks/useUpdateProfile"
 import { ProfileDto } from "@/app/modules/profile/profile.types"
+import { cn } from "@/app/lib/tailwind_merge/cn"
+import { Field } from "@/app/components/ui/Field"
+import { Textarea } from "@/app/components/ui/Textarea"
+import { Input } from "@/app/components/ui/Input"
 
 export default function EditProfilePage() {
     const { showToast } = useToastContext()
@@ -119,136 +123,68 @@ export default function EditProfilePage() {
             {/* FORM CARD */}
             <form
                 onSubmit={handleSubmit}
-                className="
-                    p-6 rounded-xl
-                    border border-neutral-200 dark:border-neutral-800
-                    bg-white/60 dark:bg-neutral-900/60
-                    backdrop-blur-md
-                    flex flex-col gap-8
-                    "
+                className={cn(
+                    "p-6 rounded-md",
+                    "border border-neutral-200 dark:border-neutral-800",
+                    "bg-white/60 dark:bg-neutral-900/60",
+                    "backdrop-blur-md",
+                    "flex flex-col gap-8"
+                )}
             >
 
                 {/* GRID */}
                 <div className="grid gap-6 md:grid-cols-2">
 
-                    {/* AUTHOR */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-                            Autor
-                        </label>
-                        <input
+                    <Field label="Autor">
+                        <Input
                             value={form.author}
-                            onChange={(e) => handleChange('author', e.target.value)}
+                            onChange={(e) => handleChange("author", e.target.value)}
                             placeholder="Tu nombre o alias"
-                            className="
-                                w-full px-3 py-2.5 rounded-lg text-sm
-                                border border-neutral-200 dark:border-neutral-700
-                                bg-white/70 dark:bg-neutral-800/70
-                                text-neutral-900 dark:text-white
-                                placeholder:text-neutral-400
-                                transition-all duration-200
-                                focus:outline-none focus:border-blue-500
-                                focus:ring-2 focus:ring-blue-500/20
-                                hover:border-neutral-300 dark:hover:border-neutral-600
-                            "
                         />
-                    </div>
+                    </Field>
 
-                    {/* YEAR */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-                            Año
-                        </label>
-                        <input
+                    <Field label="Año">
+                        <Input
                             inputMode="numeric"
+                            pattern="[0-9]{4}"
                             maxLength={4}
                             value={form.year}
-                            onChange={(e) => handleChange('year', e.target.value)}
+                            onChange={(e) => handleChange("year", e.target.value)}
                             placeholder="2026"
-                            className="
-                                w-full px-3 py-2.5 rounded-lg text-sm
-                                border border-neutral-200 dark:border-neutral-700
-                                bg-white/70 dark:bg-neutral-800/70
-                                text-neutral-900 dark:text-white
-                                placeholder:text-neutral-400
-                                transition-all duration-200
-                                focus:outline-none focus:border-blue-500
-                                focus:ring-2 focus:ring-blue-500/20
-                                hover:border-neutral-300 dark:hover:border-neutral-600
-                            "/>
-                    </div>
+                        />
+                    </Field>
 
                 </div>
 
                 {/* TEXTAREAS */}
                 <div className="flex flex-col gap-6">
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-                            Biografía corta
-                        </label>
-                        <textarea
+                    <Field label="Biografía corta">
+                        <Textarea
                             rows={2}
                             value={form.shortBio}
-                            onChange={(e) => handleChange('shortBio', e.target.value)}
+                            onChange={(e) => handleChange("shortBio", e.target.value)}
                             placeholder="Resumen breve sobre ti"
-                            className="
-                                w-full px-3 py-2.5 rounded-lg text-sm
-                                border border-neutral-200 dark:border-neutral-700
-                                bg-white/70 dark:bg-neutral-800/70
-                                text-neutral-900 dark:text-white
-                                placeholder:text-neutral-400
-                                transition-all duration-200
-                                focus:outline-none focus:border-blue-500
-                                focus:ring-2 focus:ring-blue-500/20
-                                hover:border-neutral-300 dark:hover:border-neutral-600
-                                resize-none leading-relaxed
-                            "/>
-                    </div>
+                        />
+                    </Field>
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-                            Biografía completa
-                        </label>
-                        <textarea
+                    <Field label="Biografía completa">
+                        <Textarea
                             rows={4}
                             value={form.fullBio}
-                            onChange={(e) => handleChange('fullBio', e.target.value)}
+                            onChange={(e) => handleChange("fullBio", e.target.value)}
                             placeholder="Describe tu experiencia, stack y trayectoria"
-                            className="
-                                w-full px-3 py-2.5 rounded-lg text-sm
-                                border border-neutral-200 dark:border-neutral-700
-                                bg-white/70 dark:bg-neutral-800/70
-                                text-neutral-900 dark:text-white
-                                placeholder:text-neutral-400
-                                transition-all duration-200
-                                focus:outline-none focus:border-blue-500
-                                focus:ring-2 focus:ring-blue-500/20
-                                hover:border-neutral-300 dark:hover:border-neutral-600
-                                resize-none leading-relaxed"/>
-                    </div>
+                        />
+                    </Field>
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-                            Enfoque
-                        </label>
-                        <textarea
+                    <Field label="Enfoque">
+                        <Textarea
                             rows={2}
                             value={form.learningFocus}
-                            onChange={(e) => handleChange('learningFocus', e.target.value)}
+                            onChange={(e) => handleChange("learningFocus", e.target.value)}
                             placeholder="¿Qué estás aprendiendo actualmente?"
-                            className="
-                                w-full px-3 py-2.5 rounded-lg text-sm
-                                border border-neutral-200 dark:border-neutral-700
-                                bg-white/70 dark:bg-neutral-800/70
-                                text-neutral-900 dark:text-white
-                                placeholder:text-neutral-400
-                                transition-all duration-200
-                                focus:outline-none focus:border-blue-500
-                                focus:ring-2 focus:ring-blue-500/20
-                                hover:border-neutral-300 dark:hover:border-neutral-600
-                                resize-none leading-relaxed"/>
-                    </div>
+                        />
+                    </Field>
 
                 </div>
 
@@ -274,18 +210,18 @@ export default function EditProfilePage() {
                     <button
                         type="submit"
                         disabled={!hasChanges || isPending}
-                        className={`
-                                inline-flex items-center gap-2
-                                px-5 py-2.5 rounded-lg text-sm font-medium
-                                transition-all duration-200
-                                ${hasChanges
-                                ? 'bg-blue-600 text-white hover:bg-blue-500 shadow-sm hover:shadow-md'
-                                : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-400 cursor-not-allowed'
-                            }`}>
+                        className={cn(
+                            "inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium",
+                            "transition-all duration-200",
+                            hasChanges
+                                ? "bg-blue-600 text-white hover:bg-blue-500 shadow-sm hover:shadow-md cursor-pointer"
+                                : "bg-neutral-200 dark:bg-neutral-700 text-neutral-400 cursor-not-allowed"
+                        )}
+                    >
                         {isPending ? (
                             <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         ) : (
-                            'Guardar cambios'
+                            "Guardar cambios"
                         )}
                     </button>
                 </div>

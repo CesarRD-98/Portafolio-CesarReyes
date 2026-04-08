@@ -2,7 +2,7 @@
 
 import { Section } from '@/app/components/layout/Section'
 import Loading from '@/app/components/shared/Loading'
-import ViewCv from '@/app/components/ui/view_cv_button/ViewCv'
+import ViewCv from '@/app/modules/user_public/components/ViewCv'
 import LogosSkills from '@/app/modules/user_public/components/LogosSkills'
 import { useUserContext } from '@/app/modules/user_public/user.context'
 import { renderHighlightedText } from '@/app/utils/renderText'

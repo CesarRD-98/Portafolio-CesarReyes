@@ -1,54 +1,123 @@
-"use client";
+'use client';
 
-import { useToastContext } from '@/app/hooks/toast/toast.context';
-import React, { FormEvent } from 'react'
+import { useState, FormEvent } from "react";
+import { useToastContext } from "@/app/hooks/toast/toast.context";
+
+import { Input } from "@/app/components/ui/Input";
+import { Select } from "@/app/components/ui/Select";
+import { Field } from "@/app/components/ui/Field";
+import { cn } from "@/app/lib/tailwind_merge/cn";
+
+
+type FormState = {
+    title: string;
+    value: string;
+    type: string;
+    link: string;
+};
 
 export default function NewContactPage() {
     const { showToast } = useToastContext();
 
-    const [title, setTitle] = React.useState('')
-    const [value, setValue] = React.useState('')
-    const [type, setType] = React.useState('')
-    const [link, setLink] = React.useState('')
+    const [form, setForm] = useState<FormState>({
+        title: "",
+        value: "",
+        type: "",
+        link: "",
+    });
+
+    const handleChange = (key: keyof FormState, value: string) => {
+        setForm((prev) => ({ ...prev, [key]: value }));
+    };
 
     const handleSubmit = (e: FormEvent) => {
-        e.preventDefault()
+        e.preventDefault();
+
         showToast({
-            title: 'Contacto creado',
-            message: `El contacto ha sido creado exitosamente.`,
-            type: 'success'
+            title: 'En Mantenimiento',
+            message: 'Estamos mejorando el servicio. Vuelve luego.',
+            type: 'info'
         })
-    }
+    };
+
     return (
-        <section>
-            <h4>Nuevo contacto</h4>
-            <article>
-                <form className='form-container'>
-                    <div className="form-group">
-                        <label>Título:</label>
-                        <input type="text" className="" value={title} onChange={e => setTitle(e.target.value)}></input>
-                    </div>
-                    <div className="form-group">
-                        <label>Valor:</label>
-                        <input type='text' className="" value={value} onChange={e => setValue(e.target.value)} />
-                    </div>
-                    <div className="form-group">
-                        <label>Tipo de contacto:</label>
-                        <select name="" id="" value={type} onChange={e => setType(e.target.value)}>
-                            <option defaultValue="">Selecciona un tipo</option>
-                            <option value="email">Email</option>
-                            <option value="phone">Teléfono</option>
-                            <option value="linkedin">LinkedIn</option>
-                            <option value="github">GitHub</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label>Enlace:</label>
-                        <input type="text" className="" value={link} onChange={e => setLink(e.target.value)} />
-                    </div>
-                    <button type="submit" className="btn btn-submit" onClick={handleSubmit}>Guardar cambios</button>
-                </form>
-            </article>
+        <section className="flex flex-col gap-8">
+
+            {/* HEADER */}
+            <div className="space-y-1">
+                <h1 className="text-2xl font-semibold text-neutral-900 dark:text-white">
+                    Nuevo contacto
+                </h1>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    Agrega un nuevo medio de contacto a tu perfil
+                </p>
+            </div>
+
+            {/* FORM */}
+            <form
+                onSubmit={handleSubmit}
+                className={cn(
+                    "p-6 rounded-md",
+                    "border border-neutral-200 dark:border-neutral-800",
+                    "bg-white/60 dark:bg-neutral-900/60",
+                    "backdrop-blur-md",
+                    "flex flex-col gap-6"
+                )}
+            >
+
+                <Field label="Título">
+                    <Input
+                        value={form.title}
+                        onChange={(e) => handleChange("title", e.target.value)}
+                        placeholder="Ej: Email personal, WhatsApp..."
+                    />
+                </Field>
+
+                <Field label="Valor">
+                    <Input
+                        value={form.value}
+                        onChange={(e) => handleChange("value", e.target.value)}
+                        placeholder="correo@ejemplo.com o +504..."
+                    />
+                </Field>
+
+                <Field label="Tipo de contacto">
+                    <Select
+                        value={form.type}
+                        onChange={(e) => handleChange("type", e.target.value)}
+                    >
+                        <option value="">Selecciona un tipo</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Teléfono</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="github">GitHub</option>
+                    </Select>
+                </Field>
+
+                <Field label="Enlace">
+                    <Input
+                        type="url"
+                        value={form.link}
+                        onChange={(e) => handleChange("link", e.target.value)}
+                        placeholder="https://..."
+                    />
+                </Field>
+
+                {/* ACTION */}
+                <div className="flex justify-end pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                    <button
+                        type="submit"
+                        className={cn(
+                            "px-5 py-2.5 rounded-md text-sm font-medium",
+                            "bg-blue-600 text-white hover:bg-blue-500",
+                            "transition-all shadow-sm hover:shadow-md cursor-pointer"
+                        )}
+                    >
+                        Guardar contacto
+                    </button>
+                </div>
+
+            </form>
         </section>
-    )
+    );
 }
