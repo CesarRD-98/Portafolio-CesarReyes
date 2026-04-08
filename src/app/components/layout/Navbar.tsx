@@ -31,18 +31,22 @@ export function Navbar() {
     return (
         <>
             <nav className="w-full bg-white/70 backdrop-blur-md dark:bg-neutral-900/70 sticky top-0 z-50 shadow-sm">
-                <div className="mx-auto max-w-7xl px-4 py-3 md:py-5 flex items-center justify-between">
+                <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
 
                     {/* LOGO */}
                     <Link href="/" className="flex items-center gap-2">
-                        <Image
-                            src="/dev-icon.png"
-                            alt="Logo César Reyes"
-                            width={44}
-                            height={44}
-                            priority
-                        />
-                        <span className="font-semibold text-base md:text-lg tracking-tight">
+                        <div className="relative w-12 h-12">
+                            <Image
+                                src="https://rekydsbimkpqukrlqkbi.supabase.co/storage/v1/object/public/Images/icon-nav.webp"
+                                alt="Logo Developer"
+                                fill
+                                sizes='40px'
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+
+                        <span className="font-semibold text-base tracking-tight">
                             CesarDev
                         </span>
                     </Link>

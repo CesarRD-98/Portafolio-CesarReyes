@@ -44,7 +44,7 @@ export default function LogosSkills() {
                             className={`
                                     px-3 py-1.5 rounded-md text-sm font-medium
                                     transition-all duration-200 ease-out
-                                    border border-transparent
+                                    border border-transparent cursor-pointer
                                     ${isActive
                                     ? 'bg-blue-600/75 dark:bg-blue-600/50 text-white'
                                     : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700'
@@ -65,7 +65,7 @@ export default function LogosSkills() {
                         key={skill.id}
                         className="
                             flex flex-col items-center gap-2
-                            p-3 rounded-lg
+                            p-3 rounded-md
                             border border-neutral-200 dark:border-neutral-800
                             bg-white/50 dark:bg-neutral-900/50
                             backdrop-blur-sm

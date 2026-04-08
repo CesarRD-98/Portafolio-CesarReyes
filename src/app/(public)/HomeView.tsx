@@ -86,7 +86,7 @@ export default function HomeView() {
                     <div className="absolute w-72 h-72 bg-blue-500/10 blur-3xl rounded-full -z-10" />
 
                     <Image
-                        src="/web-developer.png"
+                        src="https://rekydsbimkpqukrlqkbi.supabase.co/storage/v1/object/public/Images/web-developer.webp"
                         alt="Ilustración de desarrollador web"
                         width={380}
                         height={260}
