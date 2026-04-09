@@ -1,8 +1,8 @@
-import { useUserContext } from "@/app/modules/user_public/user.context";
+import { useUserPublicContext } from "@/app/modules/user_public/userPublic.context";
 import { FaRegFilePdf } from "react-icons/fa6";
 
 export default function ViewCv() {
-    const { user } = useUserContext();
+    const { user } = useUserPublicContext();
 
     if (!user?.cvUrl) {
         return (

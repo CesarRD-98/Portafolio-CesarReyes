@@ -1,7 +1,9 @@
-import { TypedSupabaseClient } from "../types/supabase.type";
 import { validateFile } from "@/app/utils/file/file.validator";
 import { generateFileName } from "@/app/utils/file/file.namer";
 import { FILE_TYPES } from "@/app/utils/file/file.type";
+import { Database } from "../types/Database";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { AppError } from "../../errors/appError";
 
 
 type UploadType = "avatar" | "cv";
@@ -11,7 +13,7 @@ const BUCKETS: Record<UploadType, string> = {
     cv: "Cvs",
 };
 
-export async function uploadFile(supabase: TypedSupabaseClient, file: File, userId: string, type: UploadType): Promise<string> {
+export async function uploadFile(supabase: SupabaseClient<Database>, file: File, userId: string, type: UploadType): Promise<string> {
     const config = FILE_TYPES[type];
 
     validateFile(file, config.mime);
@@ -20,10 +22,12 @@ export async function uploadFile(supabase: TypedSupabaseClient, file: File, user
 
     const { error } = await supabase.storage
         .from(BUCKETS[type])
-        .upload(filename, file);
+        .upload(filename, file, {
+            upsert: true
+        });
 
     if (error) {
-        throw new Error(`Failed to upload ${type}`);
+        throw new AppError('error', `Error al subir ${type}`);
     }
 
     const { data } = supabase.storage

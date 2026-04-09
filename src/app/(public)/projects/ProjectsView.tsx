@@ -3,19 +3,13 @@
 import { Section } from "@/app/components/layout/Section"
 import Loading from "@/app/components/shared/Loading"
 import ProjectCardComponent from "@/app/modules/user_public/components/ProjectCard"
-import { useUserContext } from "@/app/modules/user_public/user.context"
+import { useUserPublicContext } from "@/app/modules/user_public/userPublic.context"
 
 export default function ProjectsView() {
-    const { user, loading, error } = useUserContext()
+    const { user, loading, error } = useUserPublicContext()
 
     if (loading || !user) return <Loading />
-    if (error) {
-        return (
-            <p className="text-center text-red-500">
-                Error al cargar proyectos
-            </p>
-        )
-    }
+    if (error) { return <p className="text-center text-red-500">Error al cargar proyectos</p> }
 
     return (
         <Section id="projects" className="flex flex-col gap-10">

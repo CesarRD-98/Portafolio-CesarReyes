@@ -2,19 +2,23 @@
 
 import { useRouter } from 'next/navigation'
 import { ChildrenProps } from '@/app/types/children.type'
-import { useAuthContext } from '@/app/modules/auth/auth.context'
 import { LogOut } from 'lucide-react'
 import AvatarAdmin from '@/app/components/ui/AvatarAdmin'
 import Sidebar from '@/app/components/ui/sidebar_accordion/SidebarAccordion'
+import { AuthService } from '@/app/modules/auth/auth.service'
+import { useProfile } from '@/app/modules/profile/hooks/useProfile'
+import Loading from '@/app/components/shared/Loading'
 
 export default function DashboardShell({ children }: ChildrenProps) {
-    const { logout } = useAuthContext()
     const router = useRouter()
+    const { data } = useProfile()
 
     const handlerLogout = async () => {
-        const success = await logout()
-        if (success) router.push('/admin')
+        const success = await AuthService.logout()
+        if (success) { router.refresh() }
     }
+
+    if (!data) return < Loading />
 
     return (
         <div className="min-h-screen bg-white dark:bg-neutral-900">
@@ -56,10 +60,7 @@ export default function DashboardShell({ children }: ChildrenProps) {
                 </header>
 
                 {/* CONTENT */}
-                <main className="
-                    p-6 md:p-8
-                    overflow-y-auto
-                    ">
+                <main className="p-6 md:p-8 overflow-y-auto">
                     {children}
                 </main>
 

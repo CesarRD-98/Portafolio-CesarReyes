@@ -3,10 +3,10 @@
 import { Section } from "@/app/components/layout/Section"
 import Loading from "@/app/components/shared/Loading"
 import ContactCard from "@/app/modules/user_public/components/ContactCard"
-import { useUserContext } from "@/app/modules/user_public/user.context"
+import { useUserPublicContext } from "@/app/modules/user_public/userPublic.context"
 
 export default function ContactView() {
-    const { user, loading, error } = useUserContext()
+    const { user, loading, error } = useUserPublicContext()
 
     if (loading || !user) return <Loading />
     if (error)

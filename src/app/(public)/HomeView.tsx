@@ -3,13 +3,13 @@
 import Image from 'next/image'
 import { FaArrowUp, FaUser } from 'react-icons/fa6'
 import { useRouter } from 'next/navigation'
-import { useUserContext } from '../modules/user_public/user.context'
 import Loading from '../components/shared/Loading'
 import { Section } from '../components/layout/Section'
+import { useUserPublicContext } from '../modules/user_public/userPublic.context'
 
 export default function HomeView() {
     const router = useRouter()
-    const { user, loading, error } = useUserContext()
+    const { user, loading, error } = useUserPublicContext()
 
     if (loading || !user) return <Loading />
     if (error) return <p className="text-center text-red-500">Error al cargar</p>

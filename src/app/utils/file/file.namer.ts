@@ -14,5 +14,5 @@ export const generateFileName = (userId: string, file: File, prefix: string) => 
         throw new Error('Tipo de archivo no soportado')
     }
 
-    return `${userId}/${prefix}-${crypto.randomUUID()}.${ext}`
+    return `${userId}/${prefix}-${crypto.randomUUID()}-${file.name}.${ext}`
 }

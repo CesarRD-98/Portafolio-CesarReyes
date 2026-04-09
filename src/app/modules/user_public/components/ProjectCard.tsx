@@ -3,19 +3,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaArrowUp } from 'react-icons/fa6'
-import { useUserContext } from '../user.context'
-import { Project } from '../user.types'
+import { useUserPublicContext } from '../userPublic.context'
+import { Project } from '../userPublic.types'
 
 export default function ProjectCardComponent() {
-    const { user } = useUserContext()
+    const { user } = useUserPublicContext()
     const projects: Project[] = user?.projects ?? []
 
     if (!projects.length) {
-        return (
-            <p className="text-neutral-500 dark:text-neutral-400">
-                Aún no hay proyectos para mostrar
-            </p>
-        )
+        return <p className="text-neutral-500 dark:text-neutral-400">Aún no hay proyectos para mostrar</p>
     }
 
     return (

@@ -1,19 +1,18 @@
 'use client'
 
 import Image from 'next/image'
-import { useUserContext } from '../user.context'
+import { useUserPublicContext } from '../userPublic.context'
 import { useMemo, useState } from 'react'
 
 type SkillType = 'frontend' | 'backend' | 'tools'; // base de datos
 type SkillFilter = SkillType | 'all' // sirve solo UI
 
 export default function LogosSkills() {
-    const { user } = useUserContext()
+    const { user } = useUserPublicContext()
     const [filter, setFilter] = useState<SkillFilter>('all')
 
     const filters = useMemo<SkillFilter[]>(() => {
         if (!user?.skills) return ['all']
-
         const types = new Set(user.skills.map(skill => skill.type))
         return ['all', ...Array.from(types)] as SkillFilter[]
     }, [user])
@@ -21,9 +20,7 @@ export default function LogosSkills() {
 
     const skills = useMemo(() => {
         if (!user?.skills) return []
-
         if (filter === 'all') return user.skills
-
         return user.skills.filter(skill => skill.type === filter)
     }, [user, filter])
 

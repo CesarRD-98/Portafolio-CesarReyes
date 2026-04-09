@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useUserContext } from '../user.context'
-import { Contact } from '../user.types'
+import { useUserPublicContext } from '../userPublic.context'
+import { Contact } from '../userPublic.types'
 import { Mail, Phone, Github, Linkedin, Globe } from 'lucide-react'
 import { ElementType } from 'react'
 
@@ -15,7 +15,7 @@ const iconMap = {
 }
 
 export default function ContactCard() {
-  const { user } = useUserContext()
+  const { user } = useUserPublicContext()
   const contacts: Contact[] = user?.contacts ?? []
 
   if (!contacts.length) {

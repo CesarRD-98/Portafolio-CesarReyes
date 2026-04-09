@@ -4,7 +4,7 @@ import { Section } from '@/app/components/layout/Section'
 import Loading from '@/app/components/shared/Loading'
 import ViewCv from '@/app/modules/user_public/components/ViewCv'
 import LogosSkills from '@/app/modules/user_public/components/LogosSkills'
-import { useUserContext } from '@/app/modules/user_public/user.context'
+import { useUserPublicContext } from '@/app/modules/user_public/userPublic.context'
 import { renderHighlightedText } from '@/app/utils/renderText'
 import { useRouter } from 'next/navigation'
 import { FaArrowUp } from 'react-icons/fa'
@@ -12,7 +12,7 @@ import { User, Code2, Brain } from 'lucide-react'
 
 export default function AboutMeView() {
     const router = useRouter()
-    const { user, error, loading } = useUserContext()
+    const { user, error, loading } = useUserPublicContext()
 
     if (loading || !user) return <Loading />
     if (error) return <p className="text-center text-red-500">Error al cargar información</p>

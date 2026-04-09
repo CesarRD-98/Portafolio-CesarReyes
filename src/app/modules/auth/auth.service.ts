@@ -1,36 +1,26 @@
-import axios from "axios";
-import { LoginDto } from "./auth.types";
-import { extractAxiosError } from "@/app/utils/extractAxiosError";
-
-axios.defaults.withCredentials = true
+import { getSupabaseBrowserClient } from '@/app/lib/supabase/browser';
+import { mapSupabaseError } from '@/app/lib/errors/errorMapper';
+import { AppError } from '@/app/lib/errors/appError';
+import { LoginDto } from './auth.types';
 
 export const AuthService = {
-    login: async (payload: LoginDto) => {
-        try {
-            const response = await axios.post('/api/auth/login',
-                payload,
-                { withCredentials: true }
-            )
-            return response.data
-        } catch (error: unknown) {
-            throw extractAxiosError(error)
-        }
-    },
-    logout: async () => {
-        try {
-            const response = await axios.post('/api/auth/logout', { withCredentials: true })
-            return response.data
-        } catch (error: unknown) {
-            throw extractAxiosError(error)
-        }
-    },
-    getUser: async () => {
-        try {
-            const response = await axios.get('/api/auth/user', { withCredentials: true })
-            return response.data
-        } catch (error: unknown) {
-            throw extractAxiosError(error)
-        }
-    }
-}
+    login: async (dto: LoginDto): Promise<void> => {
+        const supabase = getSupabaseBrowserClient();
+        const { error } = await supabase.auth.signInWithPassword(dto);
 
+        if (error) {
+            throw mapSupabaseError(error);
+        }
+    },
+
+    logout: async (): Promise<boolean> => {
+        const supabase = getSupabaseBrowserClient();
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+            throw new AppError('error', 'Error al cerrar sesión');
+        }
+
+        return true
+    },
+};

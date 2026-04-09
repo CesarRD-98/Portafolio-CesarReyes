@@ -28,15 +28,9 @@ export const ToastItem = ({ toast }: { toast: Toast }) => {
             onMouseEnter={() => pauseToast(toast.id)}
             onMouseLeave={() => resumeToast(toast.id)}
             className={`
-                group relative flex items-start gap-3
-                w-full max-w-sm
-                p-4 rounded-md
-                border border-neutral-200 dark:border-neutral-800
-                bg-white/80 dark:bg-neutral-900/80
-                backdrop-blur-md shadow-lg
-
+                group relative flex items-start gap-3 w-full max-w-sm p-4 rounded-md border border-neutral-200 dark:border-neutral-800
+                bg-neutral-100 dark:bg-neutral-800/50 backdrop-blur-lg shadow-lg
                 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-
                 ${toast.closing
                     ? "opacity-0 translate-y-2 scale-95"
                     : visible
@@ -58,12 +52,12 @@ export const ToastItem = ({ toast }: { toast: Toast }) => {
 
             {/* CONTENT */}
             <div className="flex-1">
-                <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-100">
+                <p className="text-sm font-semibold text-neutral-900 dark:text-white">
                     {toast.title}
                 </p>
 
                 {toast.message && (
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    <p className="text-sm text-neutral-700 dark:text-neutral-400">
                         {toast.message}
                     </p>
                 )}

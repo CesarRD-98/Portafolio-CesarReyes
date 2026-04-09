@@ -1,8 +1,7 @@
 import { Profile } from "@/app/modules/profile/profile.types";
+import { AppError } from "../errors/appError";
 
-export function mapFormDataToProfile(
-    formData: FormData
-): Partial<Profile> {
+export function mapFormDataToProfile(formData: FormData): Partial<Profile> {
     const author = formData.get("author") as string | null;
     const year = formData.get("year") as string | null;
     const shortBio = formData.get("shortBio") as string | null;
@@ -19,7 +18,7 @@ export function mapFormDataToProfile(
     if (year) {
         const parsedYear = parseInt(year);
         if (isNaN(parsedYear)) {
-            throw new Error("Invalid year format");
+            throw new AppError("error", "Invalid year format");
         }
         updateData.year = parsedYear;
     }
