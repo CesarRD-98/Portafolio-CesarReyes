@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Fira_Sans } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
+import { Providers } from "./providers/Index";
 
 export const metadata: Metadata = {
     title: {
@@ -20,7 +20,7 @@ const firaSans = Fira_Sans({
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="es" className={firaSans.variable} suppressHydrationWarning>
+        <html lang="es" className={firaSans.variable}>
             <body className="font-sans min-h-screen flex flex-col">
                 <Providers>
                     {children}

@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 import { ChildrenProps } from "@/app/types/children.type";
 import { User } from "@/app/modules/user_public/userPublic.types";
 import { useUserPublic } from "./hooks/useUserPublic";
@@ -13,26 +13,17 @@ interface UserPublicTypeContext {
 
 export const UserPublicContext = createContext<UserPublicTypeContext | undefined>(undefined)
 
-export default function UserPublicProvider({ children }: ChildrenProps) {
-    const { data } = useUserPublic()
-
-    const [user, setUser] = useState<User | null>(null)
-    const [error, setError] = useState<string | null>(null)
-    const [loading, setLoading] = useState<boolean>(false)
-
-    useEffect(() => {
-        try {
-            setLoading(true)
-            if (data) setUser(data)
-        } catch (error: unknown) {
-            if (error instanceof Error) { setError('Error al cargar datos del usuario') }
-        } finally {
-            setLoading(false)
-        }
-    }, [data])
+export function UserPublicProvider({ children }: ChildrenProps) {
+    const { data, isLoading, error } = useUserPublic()
 
     return (
-        <UserPublicContext.Provider value={{ user, loading, error }}>
+        <UserPublicContext.Provider
+            value={{
+                user: data ?? null,
+                loading: isLoading,
+                error: error ? 'Error al cargar datos del usuario' : null
+            }}
+        >
             {children}
         </UserPublicContext.Provider>
     )

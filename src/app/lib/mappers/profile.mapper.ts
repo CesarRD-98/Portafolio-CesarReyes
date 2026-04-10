@@ -1,4 +1,4 @@
-import { Profile } from "@/app/modules/profile/profile.types";
+import { Profile } from "@/app/modules/dashboard/profile/profile.types";
 import { AppError } from "../errors/appError";
 
 export function mapFormDataToProfile(formData: FormData): Partial<Profile> {

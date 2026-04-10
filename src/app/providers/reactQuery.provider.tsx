@@ -5,7 +5,20 @@ import { useState } from 'react'
 import { ChildrenProps } from '../types/children.type'
 
 export function ReactQueryProvider({ children }: ChildrenProps) {
-    const [queryClient] = useState(() => new QueryClient())
+
+    const [queryClient] = useState(() =>
+        new QueryClient({
+            defaultOptions: {
+                queries: {
+                    refetchOnMount: true,
+                    refetchOnWindowFocus: true,
+                    refetchOnReconnect: true,
+                    staleTime: 0,
+                    retry: 1,
+                },
+            },
+        })
+    )
 
     return (
         <QueryClientProvider client={queryClient}>

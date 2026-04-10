@@ -1,7 +1,6 @@
-import { ChildrenProps } from "./types/children.type";
-import { ToastProvider } from "./hooks/toast/toast.context";
-import { ReactQueryProvider } from "./providers/reactQuery.provider";
-
+import { ToastProvider } from "../hooks/toast/toast.context";
+import { ChildrenProps } from "../types/children.type";
+import { ReactQueryProvider } from "./ReactQuery.provider";
 
 export function Providers({ children }: ChildrenProps) {
     return (

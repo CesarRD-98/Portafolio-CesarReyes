@@ -1,24 +1,25 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ChildrenProps } from '@/app/types/children.type'
 import { LogOut } from 'lucide-react'
 import AvatarAdmin from '@/app/components/ui/AvatarAdmin'
 import Sidebar from '@/app/components/ui/sidebar_accordion/SidebarAccordion'
 import { AuthService } from '@/app/modules/auth/auth.service'
-import { useProfile } from '@/app/modules/profile/hooks/useProfile'
 import Loading from '@/app/components/shared/Loading'
+import { useProfile } from '@/app/modules/dashboard/profile/hooks/useProfile'
+import { Main } from '@/app/components/layout/Main'
+import { Header } from '@/app/components/layout/Header'
+import { ChildrenProps } from '@/app/types/children.type'
+
 
 export default function DashboardShell({ children }: ChildrenProps) {
     const router = useRouter()
-    const { data } = useProfile()
+    const { data, isLoading } = useProfile()
 
     const handlerLogout = async () => {
         const success = await AuthService.logout()
-        if (success) { router.refresh() }
+        if (success) { router.push('/admin') }
     }
-
-    if (!data) return < Loading />
 
     return (
         <div className="min-h-screen bg-white dark:bg-neutral-900">
@@ -30,40 +31,28 @@ export default function DashboardShell({ children }: ChildrenProps) {
             <div className="md:pl-[260px]">
 
                 {/* TOP BAR (NUEVO) */}
-                <header className="
-                    sticky top-0 z-30
-                    flex items-center justify-between
-                    px-6 py-4
-                    border-b border-neutral-200 dark:border-neutral-800
-                    bg-white/70 dark:bg-neutral-900/70
-                    backdrop-blur-md
-                    ">
-
+                <Header className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 
+                border-b border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md">
                     <div className="flex items-center gap-3">
                         <AvatarAdmin />
                     </div>
-
                     <button
                         onClick={handlerLogout}
                         className="
-                            inline-flex items-center gap-2
-                            px-4 py-2 rounded-md text-sm font-semibold
-                            text-red-700 dark:text-red-500 hover:text-white
-                            hover:bg-red-600 dark:hover:bg-red-800
+                            inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold 
+                            text-red-700 dark:text-red-500 hover:text-white hover:bg-red-600 dark:hover:bg-red-800
                             transition-all duration-200 cursor-pointer
                             "
                     >
                         <LogOut size={20} />
                         <span className='hidden md:inline-flex'>Cerrar sesión</span>
                     </button>
-
-                </header>
+                </Header>
 
                 {/* CONTENT */}
-                <main className="p-6 md:p-8 overflow-y-auto">
-                    {children}
-                </main>
-
+                <Main className='p-6 md:p-8 overflow-y-auto'>
+                    {!data && isLoading ? (<Loading />) : (children)}
+                </Main>
             </div>
 
         </div>

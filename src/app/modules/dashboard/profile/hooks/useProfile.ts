@@ -1,7 +1,7 @@
-import { ProfileService } from "@/app/modules/profile/profile.service"
+import { ProfileService } from "@/app/modules/dashboard/profile/profile.service"
 import { useQuery } from "@tanstack/react-query"
 
-export function useProfile() {
+export const useProfile = () => {
     return useQuery({
         queryKey: ['profile'],
         queryFn: ProfileService.getProfile,

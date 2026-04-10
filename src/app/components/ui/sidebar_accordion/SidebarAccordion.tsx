@@ -53,7 +53,7 @@ export default function Sidebar() {
             <aside
                 className={`
                     fixed z-50 top-0 left-0 h-full bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800
-                    transition-all duration-200 flex flex-col
+                    transition-all duration-300 ease-in-out flex flex-col
                     ${collapsed ? "w-[70px]" : "w-[260px]"}
                     ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
                     `}>
@@ -67,7 +67,7 @@ export default function Sidebar() {
 
                     <button
                         onClick={() => setCollapsed((prev) => !prev)}
-                        className="hidden md:flex p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer"
+                        className="hidden md:flex p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer"
                     >
                         <Menu size={18} />
                     </button>
@@ -128,7 +128,7 @@ export default function Sidebar() {
                                 {/* ITEMS */}
                                 <div
                                     className={`
-                                        overflow-hidden transition-all duration-200
+                                        overflow-hidden transition-all duration-300 ease-in-out
                                         ${isOpen && !collapsed ? "max-h-96 mt-1" : "max-h-0"}
                                     `}
                                 >
@@ -171,7 +171,7 @@ export default function Sidebar() {
             <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={`fixed ${mobileOpen ? "-bottom-full -left-full" : "bottom-3 left-3"} 
-                z-50 md:hidden p-3 rounded-full bg-blue-600/75 hover:bg-blue-600 text-white shadow-md transition-all cursor-pointer`}
+                z-50 md:hidden p-3 rounded-full bg-blue-600/75 hover:bg-blue-600 text-white shadow-md transition-all ease-in-out cursor-pointer`}
             >
                 <Menu size={20} />
             </button>

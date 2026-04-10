@@ -34,7 +34,6 @@ export const menu: MenuSection[] = [
         icon: Folder,
         items: [
             { label: "Ver proyectos", href: "/admin/dashboard/projects" },
-            { label: "Editar o eliminar", href: "/admin/dashboard/projects/edit" },
             { label: "Nuevo", href: "/admin/dashboard/projects/new" },
         ],
     },
@@ -44,7 +43,6 @@ export const menu: MenuSection[] = [
         icon: Mail,
         items: [
             { label: "Ver contactos", href: "/admin/dashboard/contacts" },
-            { label: "Editar o eliminar", href: "/admin/dashboard/contacts/edit" },
             { label: "Nuevo", href: "/admin/dashboard/contacts/new" },
         ],
     },
@@ -54,7 +52,6 @@ export const menu: MenuSection[] = [
         icon: Wrench,
         items: [
             { label: "Ver habilidades", href: "/admin/dashboard/skills" },
-            { label: "Editar o eliminar", href: "/admin/dashboard/skills/edit" },
             { label: "Nuevo", href: "/admin/dashboard/skills/new" },
         ],
     },

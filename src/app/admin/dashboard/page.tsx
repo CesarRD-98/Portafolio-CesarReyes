@@ -60,24 +60,15 @@ export default function DashboardPage() {
                             key={action.href}
                             href={action.href}
                             className="
-                                group flex flex-col gap-4
-                                p-5 rounded-xl
-                                border border-neutral-200 dark:border-neutral-800
-                                bg-white/60 dark:bg-neutral-900/60
-                                backdrop-blur-md
-                                transition-all duration-200 ease-out
-                                hover:-translate-y-[2px]
-                                hover:shadow-md
+                                group flex flex-col gap-4 p-5 rounded-xl border border-neutral-200 dark:border-neutral-800
+                                bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md transition-all duration-200 ease-out
+                                hover:-translate-y-[2px] hover:shadow-md
                             ">
 
                             {/* ICON */}
                             <div className="
-                                    w-10 h-10 flex items-center justify-center
-                                    rounded-lg
-                                    bg-neutral-100 dark:bg-neutral-800
-                                    text-neutral-700 dark:text-neutral-300
-                                    group-hover:text-blue-600
-                                    transition-colors
+                                    w-10 h-10 flex items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800
+                                    text-neutral-700 dark:text-neutral-300 group-hover:text-blue-600 transition-colors
                                 ">
                                 <Icon size={20} />
                             </div>

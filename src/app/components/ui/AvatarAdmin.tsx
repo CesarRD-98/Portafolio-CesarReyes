@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { useProfile } from '@/app/modules/profile/hooks/useProfile';
+import { useProfile } from '@/app/modules/dashboard/profile/hooks/useProfile';
 
 export default function AvatarAdmin() {
     const { data: profile } = useProfile();
