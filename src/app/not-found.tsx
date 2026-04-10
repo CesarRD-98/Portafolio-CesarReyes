@@ -9,8 +9,10 @@ export default function NotFound() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-neutral-900 px-6 text-center">
 
-            <h1 className="text-6xl font-bold text-neutral-800 dark:text-white">
-                404
+            <h1 className="text-6xl font-bold">
+                <span className='text-blue-500 dark:text-blue-600/75'>4</span>
+                <span className='text-neutral-600 dark:text-neutral-400/75'>0</span>
+                <span className='text-blue-500 dark:text-blue-600/75'>4</span>
             </h1>
 
             <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
@@ -27,7 +29,8 @@ export default function NotFound() {
 
                 <button
                     onClick={() => router.back()}
-                    className="px-5 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300"
+                    className="px-5 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 
+                    cursor-pointer"
                 >
                     Volver atrás
                 </button>
